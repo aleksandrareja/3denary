@@ -87,7 +87,7 @@
                     :is-selected="true"
                 >
                     <div class="container mt-[60px] max-1180:px-5">
-                        <p class="text-lg text-zinc-500 max-1180:text-sm">
+                        <p class="text-md text-zinc-500 max-1180:text-sm">
                             {!! $product->description !!}
                         </p>
                     </div>
@@ -103,15 +103,17 @@
                         :title="trans('shop::app.products.view.additional-information')"
                         :is-selected="false"
                     >
-                        <div class="container mt-[60px] max-1180:px-5">
-                            <div class="mt-8 grid max-w-max grid-cols-[auto_1fr] gap-4">
+                        <div class="container mt-[60px] max-1180:px-5 flex justify-center">
+                            <table class="table-auto w-[500px] border-1 border-zinc-400">
+                                <tbody>
                                 @foreach ($customAttributeValues as $customAttributeValue)
                                     @if (! empty($customAttributeValue['value']))
-                                        <div class="grid">
-                                            <p class="text-base text-black">
+                                        <tr class="border-b h-[60px] border-zinc-200 last:border-0">
+                                        <td class="font-bold">
+                                            <p class="text-base text-zinc-700">
                                                 {!! $customAttributeValue['label'] !!}
                                             </p>
-                                        </div>
+                                        </td>
 
                                         @if ($customAttributeValue['type'] == 'file')
                                             <a
@@ -131,15 +133,17 @@
                                                 />
                                             </a>
                                         @else
-                                            <div class="grid">
+                                            <td>
                                                 <p class="text-base text-zinc-500">
                                                     {!! $customAttributeValue['value'] !!}
                                                 </p>
-                                            </div>
+                                            </td>
                                         @endif
+                                        </tr>
                                     @endif
                                 @endforeach
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </x-shop::tabs.item>
                 @endif
@@ -190,45 +194,48 @@
                 </x-slot>
 
                 <x-slot:content class="max-sm:px-0">
-                    <div class="container max-1180:px-5">
-                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-zinc-500 max-1180:text-sm">
-                            @foreach ($customAttributeValues as $customAttributeValue)
-                                @if (! empty($customAttributeValue['value']))
-                                    <div class="grid">
-                                        <p class="text-base text-black">
-                                            {{ $customAttributeValue['label'] }}
-                                        </p>
-                                    </div>
-
-                                    @if ($customAttributeValue['type'] == 'file')
-                                        <a
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                            download="{{ $customAttributeValue['label'] }}"
-                                        >
-                                            <span class="icon-download text-2xl"></span>
-                                        </a>
-                                    @elseif ($customAttributeValue['type'] == 'image')
-                                        <a
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                            download="{{ $customAttributeValue['label'] }}"
-                                        >
-                                            <img
-                                                class="h-5 min-h-5 w-5 min-w-5"
-                                                src="{{ Storage::url($customAttributeValue['value']) }}"
-                                                alt="Product Image"
-                                            />
-                                        </a>
-                                    @else
-                                        <div class="grid">
-                                            <p class="text-base text-zinc-500">
-                                                {{ $customAttributeValue['value'] ?? '-' }}
+                        <div class="container mt-[60px] max-1180:px-5 flex justify-center">
+                            <table class="table-auto w-full border-1 border-zinc-400">
+                                <tbody>
+                                @foreach ($customAttributeValues as $customAttributeValue)
+                                    @if (! empty($customAttributeValue['value']))
+                                        <tr class="border-b h-[60px] border-zinc-200 last:border-0">
+                                        <td class="font-bold">
+                                            <p class="text-sm text-zinc-700">
+                                                {!! $customAttributeValue['label'] !!}
                                             </p>
-                                        </div>
+                                        </td>
+
+                                        @if ($customAttributeValue['type'] == 'file')
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                                download="{{ $customAttributeValue['label'] }}"
+                                            >
+                                                <span class="icon-download text-2xl"></span>
+                                            </a>
+                                        @elseif ($customAttributeValue['type'] == 'image')
+                                            <a
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                                download="{{ $customAttributeValue['label'] }}"
+                                            >
+                                                <img
+                                                    class="h-5 min-h-5 w-5 min-w-5"
+                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
+                                                />
+                                            </a>
+                                        @else
+                                            <td>
+                                                <p class="text-sm text-zinc-500">
+                                                    {!! $customAttributeValue['value'] !!}
+                                                </p>
+                                            </td>
+                                        @endif
+                                        </tr>
                                     @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
                 </x-slot>
             </x-shop::accordion>
         @endif
@@ -336,7 +343,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2 max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
+                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -360,7 +367,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-1.5 max-sm:text-sm">
+                                <p class="mt-6 text-zinc-500 max-sm:mt-5 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 

@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Navigation -->
 <div
-    class="grid mt-5 w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-b border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
+    class="grid mt-2 w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-zinc-200 bg-white ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
