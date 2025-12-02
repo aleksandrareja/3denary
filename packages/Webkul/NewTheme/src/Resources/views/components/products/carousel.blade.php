@@ -12,11 +12,11 @@
         id="v-products-carousel-template"
     >
         <div
-            class="container mt-20 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
+            class="container mt-20 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4 pb-8"
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="font-dmserif text-3xl max-md:text-2xl max-sm:text-xl">
+                <h2 class="text-xl max-md:text-lg max-sm:text-md">
                     @{{ title }}
                 </h2>
 
@@ -26,7 +26,7 @@
                         class="hidden max-lg:flex"
                         v-if="navigationLink"
                     >
-                        <p class="items-center text-xl max-md:text-base max-sm:text-sm">
+                        <p class="items-center text-xl max-md:text-sm text-navyBlue">
                             @lang('shop::app.components.products.carousel.view-all')
 
                             <span class="icon-arrow-right text-2xl max-md:text-lg max-sm:text-sm"></span>
@@ -36,7 +36,7 @@
                     <template v-if="products.length > 3">
                         <span
                             v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
-                            class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
+                            class="icon-arrow-left rtl:icon-arrow-right inline-block cursor-pointer text-2xl max-lg:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.previous')"
                             tabindex="0"
@@ -46,7 +46,7 @@
 
                         <span
                             v-if="products.length > 4 || (products.length > 3 && isScreenMax2xl)"
-                            class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl max-lg:hidden"
+                            class="icon-arrow-right rtl:icon-arrow-left inline-block cursor-pointer text-2xl max-lg:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.carousel.next')"
                             tabindex="0"
@@ -59,7 +59,7 @@
 
             <div
                 ref="swiperContainer"
-                class="flex gap-8 pb-2.5 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-md:gap-7 max-md:mt-5 max-sm:gap-4 max-md:pb-0 max-md:whitespace-nowrap"
+                class="flex gap-8 pb-8 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-md:gap-7 max-md:mt-5 max-sm:gap-4 max-md:whitespace-nowrap"
             >
                 <x-shop::products.card
                     class="min-w-[291px] max-md:h-fit max-md:min-w-56 max-sm:min-w-[192px]"

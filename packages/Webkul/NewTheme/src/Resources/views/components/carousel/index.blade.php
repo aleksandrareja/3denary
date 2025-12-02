@@ -2,7 +2,7 @@
 
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="overflow-hidden">
-        <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
+        <div class="shimmer aspect-[2.743/1] max-sm:h-[85vh] max-sm:aspect-auto max-h-screen w-screen"></div>
     </div>
 </v-carousel>
 
@@ -25,7 +25,7 @@
                     ref="slide"
                 >
                     <x-shop::media.images.lazy
-                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
+                        class="aspect-[2.743/1] max-sm:h-[85vh] max-sm:aspect-auto max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
                         ::lazy="index === 0 ? false : true"
                         ::src="image.image"
                         ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
@@ -45,7 +45,7 @@
 
             <!-- Navigation -->
             <span
-                class="icon-arrow-left absolute left-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
+                class="icon-arrow-left absolute left-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full p-3 text-2xl font-bold text-gray opacity-30 transition-all md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'ltr' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'ltr' ? currentIndex > 0 : currentIndex <= 0
@@ -59,7 +59,7 @@
             </span>
 
             <span
-                class="icon-arrow-right absolute right-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
+                class="icon-arrow-right absolute right-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full p-3 text-2xl font-bold text-gray opacity-30 transition-all md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'rtl' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'rtl' ? currentIndex < 0 : currentIndex >= 0
@@ -77,7 +77,7 @@
                 <div
                     v-for="(image, index) in images"
                     :key="index"
-                    class="sm:p-2.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5
+                    class="sm:p-2.5 mx-1 h-2 w-2 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5
                     p-2 focus:outline-none"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     role="button"
