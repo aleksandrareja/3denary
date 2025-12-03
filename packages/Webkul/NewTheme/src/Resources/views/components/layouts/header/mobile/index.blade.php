@@ -23,7 +23,6 @@
 
             <a
                 href="{{ route('shop.home.index') }}"
-                class="max-h-[30px]"
                 aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
             >
                 <img
@@ -202,34 +201,6 @@
 
     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.before') !!}
 
-    <!-- Serach Catalog Form -->
-    <form action="{{ route('shop.search.index') }}" class="flex w-full items-center">
-        <label
-            for="organic-search"
-            class="sr-only"
-        >
-            @lang('shop::app.components.layouts.header.mobile.search')
-        </label>
-
-        <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
-
-            <input
-                type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
-                name="query"
-                value="{{ request('query') }}"
-                placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
-                required
-            >
-
-            @if (core()->getConfigData('catalog.products.settings.image_search'))
-                @include('shop::search.images.index')
-            @endif
-        </div>
-    </form>
-
-    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.after') !!}
 </div>
 
 @pushOnce('scripts')
@@ -247,7 +218,7 @@
                 <div class="flex items-center justify-between">
                     <a href="{{ route('shop.home.index') }}">
                         <img
-                            src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                            src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
                             alt="{{ config('app.name') }}"
                             width="131"
                             height="29"
@@ -290,6 +261,37 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.before') !!}
 
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.before') !!}
+
+                <!-- Serach Catalog Form -->
+                <form action="{{ route('shop.search.index') }}" class="flex items-center">
+                    <label
+                        for="organic-search"
+                        class="sr-only"
+                    >
+                        @lang('shop::app.components.layouts.header.mobile.search')
+                    </label>
+
+                    <div class="relative w-full p-2.5">
+                        <div class="icon-search pointer-events-none absolute top-5 flex items-center text-2xl max-md:text-xl max-sm:top-4 ltr:left-3 rtl:right-3"></div>
+
+                        <input
+                            type="text"
+                            class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                            name="query"
+                            value="{{ request('query') }}"
+                            placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
+                            required
+                        >
+
+                        @if (core()->getConfigData('catalog.products.settings.image_search'))
+                            @include('shop::search.images.index')
+                        @endif
+                    </div>
+                </form>
+
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.after') !!}
+
                 <!-- Mobile category view -->
                 <v-mobile-category ref="mobileCategory"></v-mobile-category>
 
@@ -308,7 +310,7 @@
                             <!-- Drawer Toggler -->
                             <x-slot:toggle>
                                 <div
-                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 font-medium uppercase max-md:py-3 text-navyBlue"
                                     role="button"
                                 >
                                     {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
@@ -346,7 +348,7 @@
                             <!-- Drawer Toggler -->
                             <x-slot:toggle>
                                 <div
-                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
+                                    class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 font-medium uppercase max-md:py-3 text-navyBlue"
                                     role="button"
                                 >
                                     <img
