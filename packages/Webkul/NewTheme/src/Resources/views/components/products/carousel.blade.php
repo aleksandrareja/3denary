@@ -16,7 +16,7 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="text-xl max-md:text-lg max-sm:text-md">
+                <h2 class="text-xl max-md:text-lg max-sm:text-md !text-zinc-800">
                     @{{ title }}
                 </h2>
 
@@ -26,7 +26,7 @@
                         class="hidden max-lg:flex"
                         v-if="navigationLink"
                     >
-                        <p class="items-center text-xl max-md:text-sm text-navyBlue">
+                        <p class="items-center text-lg max-md:text-sm !text-zinc-800">
                             @lang('shop::app.components.products.carousel.view-all')
 
                             <span class="icon-arrow-right text-2xl max-md:text-lg max-sm:text-sm"></span>
