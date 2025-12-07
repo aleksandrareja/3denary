@@ -31,14 +31,16 @@ module.exports = {
             colors: {
                 navyBlue: "#38200F",
                 lightOrange: "#f5f2ed",
+                goldenOrange: "rgba(196, 154, 54, 1)",
                 darkGreen: '#90785b',
-                transparentOrange: "#f5f2ed9c",
+                transparentOrange:  "rgba(245, 242, 237, 0.61)",
+                transparent:  "rgba(245, 242, 237, 0.2)",
                 darkBlue: '#0044F2',
                 darkPink: '#F85156',
             },
 
             fontFamily: {
-                poppins: ["Lato", "Helvetica", "Arial", "sans-serif"],
+                poppins: ["Inter", "Lato", "Helvetica", "Arial", "sans-serif"],
                 dmserif: ["DM Serif Display", "serif"],
             },
         }

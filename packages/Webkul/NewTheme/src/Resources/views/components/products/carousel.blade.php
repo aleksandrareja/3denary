@@ -16,9 +16,9 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="text-xl max-md:text-lg max-sm:text-md !text-zinc-800">
+                <p class="text-xl max-md:text-lg max-sm:text-md !text-gray-800 font-semibold">
                     @{{ title }}
-                </h2>
+                </p>
 
                 <div class="flex items-center justify-between gap-8">
                     <a
@@ -69,7 +69,7 @@
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
+                class="bg-goldenOrange hover:bg-darkGreen text-lightOrange font-semibold transition mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
                 :aria-label="title"
                 v-if="navigationLink"
             >

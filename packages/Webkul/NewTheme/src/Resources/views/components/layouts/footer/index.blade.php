@@ -21,7 +21,7 @@
     ]);
 @endphp
 
-<footer class="mt-9 bg-navyBlue max-sm:mt-10">
+<footer class="mt-9 bg-navyBlue max-sm:mt-10 px-3">
     <div class="flex flex-wrap justify-between items-start gap-x-10 gap-y-8 p-16 max-lg:justify-center max-md:flex-col max-md:items-center max-md:gap-y-15 max-md:p-10 max-md:px-2">
 
         <!-- Logo -->
@@ -36,10 +36,10 @@
         </div>
 
         <!-- Footer links -->
-        <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 justify-center max-sm:gap-30">
+        <div class="flex items-start gap-24 max-1180:gap-6 justify-center max-sm:gap-30">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-md max-1180:text-sm text-center max-md:text-left">
+                    <ul class="grid gap-5 text-md text-center max-md:text-left max-sm:text-base">
                         @php
                             usort($footerLinkSection, fn($a, $b) => $a['sort_order'] - $b['sort_order']);
                         @endphp
@@ -59,12 +59,12 @@
         <!-- Newsletter subscription -->
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5 text-center max-md:text-left">
-                <p class="max-w-[320px] text-3xl text-lightOrange max-md:text-2xl max-sm:text-lg mx-auto max-md:mx-0">
+            <div class="grid gap-2.5 max-sm:mt-6">
+                <p class="max-w-[400px] text-3xl text-lightOrange max-md:text-2xl font-semibold">
                     @lang('shop::app.components.layouts.footer.newsletter-text')
                 </p>
 
-                <p class="text-xs text-lightOrange">
+                <p class="mt-4 text-lg text-lightOrange font-semibold">
                     @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
                 </p>
 
@@ -73,28 +73,25 @@
                         :action="route('shop.subscription.store')"
                         class="w-full max-w-lg"
                     >
-                        <div class="relative w-full">
-                            <div class="absolute inset-0">
+                        <div class="flex w-full justify-between gap-4">
                                 <x-shop::form.control-group.control
                                     type="email"
-                                    class="block w-full rounded-xl border-2 border-[#e9decc] bg-zinc-100 px-5 py-4 text-sm max-md:p-3 max-sm:text-xs max-sm:py-2"
+                                    class="bg-transparent"
                                     name="email"
                                     rules="required|email"
                                     label="Email"
                                     :aria-label="trans('shop::app.components.layouts.footer.email')"
                                     placeholder="email@example.com"
                                 />
-                            </div>
-
-                            <x-shop::form.control-group.error control-name="email" />
 
                             <button
                                 type="submit"
-                                class="absolute top-1/2 right-2 flex items-center whitespace-nowrap rounded-xl bg-lightOrange px-7 py-2.5 font-medium hover:bg-zinc-300 transition max-md:px-5 max-md:text-xs max-sm:px-4 max-sm:py-2 max-sm:rounded-lg"
+                                class="flex h-max-[50px] font-semibold text-lightOrange items-center whitespace-nowrap rounded-md bg-goldenOrange px-7 py-2.5 font-medium hover:bg-darkGreen transition max-md:px-5 max-md:text-xs max-sm:px-4 max-sm:py-2 max-sm:rounded-lg"
                             >
                                 @lang('shop::app.components.layouts.footer.subscribe')
                             </button>
                         </div>
+                        <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form>
                 </div>
             </div>

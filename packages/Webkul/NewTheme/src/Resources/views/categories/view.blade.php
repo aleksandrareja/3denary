@@ -47,7 +47,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="w-full flex justify-center items-center bg-navyBlue h-[100px] text-3xl max-sm:text-xl text-lightOrange uppercase">
+            <div class="w-full flex justify-center items-center h-[100px] text-3xl max-sm:text-xl text-navyBlue">
                 {!! $category->description !!}
             </div>
         @endif

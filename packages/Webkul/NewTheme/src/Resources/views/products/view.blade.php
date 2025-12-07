@@ -134,7 +134,7 @@
                                             </a>
                                         @else
                                             <td>
-                                                <p class="text-base text-zinc-500">
+                                                <p class="text-base text-zinc-500 text-right">
                                                     {!! $customAttributeValue['value'] !!}
                                                 </p>
                                             </td>
@@ -194,7 +194,7 @@
                 </x-slot>
 
                 <x-slot:content class="max-sm:px-0">
-                        <div class="container mt-[60px] max-1180:px-5 flex justify-center">
+                        <div class="container max-1180:px-5 flex justify-center">
                             <table class="table-auto w-full border-1 border-zinc-400">
                                 <tbody>
                                 @foreach ($customAttributeValues as $customAttributeValue)
@@ -225,7 +225,7 @@
                                             </a>
                                         @else
                                             <td>
-                                                <p class="text-sm text-zinc-500">
+                                                <p class="text-sm text-zinc-500 text-right">
                                                     {!! $customAttributeValue['value'] !!}
                                                 </p>
                                             </td>
@@ -299,7 +299,7 @@
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="break-words text-3xl font-medium max-sm:text-xl">
+                                    <h1 class="break-words text-3xl font-medium">
                                         {{ $product->name }}
                                     </h1>
 
@@ -343,7 +343,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
+                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-xl !text-goldenOrange">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -404,14 +404,14 @@
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
                                     <!-- Wiersz z przyciskami -->
-                                    <div class="mt-5 flex flex-wrap gap-3 w-full">
+                                    <div class="mt-5 flex flex-wrap gap-5 w-full max-w-[470px]">
 
                                         @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                                             {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
 
                                                 <x-shop::button
                                                     type="submit"
-                                                    class="secondary-button w-full max-sm:w-full py-4 text-center rounded-lg transition-all duration-200"
+                                                    class="secondary-button w-full text-center transition-all duration-200"
                                                     button-type="secondary-button"
                                                     :loading="false"
                                                     :title="trans('shop::app.products.view.add-to-cart')"
@@ -427,7 +427,7 @@
                                         @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                                 <x-shop::button
                                                     type="submit"
-                                                    class="primary-button w-full max-sm:w-full py-4 text-center rounded-lg transition-all duration-200"
+                                                    class="primary-button w-full text-center transition-all duration-200"
                                                     button-type="primary-button"
                                                     :title="trans('shop::app.products.view.buy-now')"
                                                     :disabled="! $product->isSaleable(1)"

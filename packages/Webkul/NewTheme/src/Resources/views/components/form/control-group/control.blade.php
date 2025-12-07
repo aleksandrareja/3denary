@@ -18,8 +18,8 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm']) }}
+                :class="[errors.length ? 'border !border-red-500' : '']"
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full w-max-[500px] rounded-md px-5 py-3 text-base text-white outline-1 -outline-offset-1 outline-transparentOrange placeholder:text-transparentOrange focus:outline-2 focus:-outline-offset-2 focus:outline-darkGreen sm:text-sm/6']) }}
             >
         </v-field>
         @break
