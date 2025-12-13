@@ -70,112 +70,25 @@
         <x-shop::shimmer.products.view />
     </v-product>
 
-    <!-- Information Section -->
-    <div class="1180:mt-20">
-        <div class="max-1180:hidden">
-            <x-shop::tabs
-                position="center"
-                ref="productTabs"
-            >
-                <!-- Description Tab -->
-                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+    
 
-                <x-shop::tabs.item
-                    id="descritpion-tab"
-                    class="container mt-[60px] !p-0"
-                    :title="trans('shop::app.products.view.description')"
-                    :is-selected="true"
-                >
-                    <div class="container mt-[60px] max-1180:px-5">
-                        <p class="text-md text-zinc-500 max-1180:text-sm">
-                            {!! $product->description !!}
-                        </p>
-                    </div>
-                </x-shop::tabs.item>
 
-                {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
-
-                <!-- Additional Information Tab -->
-                @if(count($attributeData))
-                    <x-shop::tabs.item
-                        id="information-tab"
-                        class="container mt-[60px] !p-0"
-                        :title="trans('shop::app.products.view.additional-information')"
-                        :is-selected="false"
-                    >
-                        <div class="container mt-[60px] max-1180:px-5 flex justify-center">
-                            <table class="table-auto w-[500px] border-1 border-zinc-400">
-                                <tbody>
-                                @foreach ($customAttributeValues as $customAttributeValue)
-                                    @if (! empty($customAttributeValue['value']))
-                                        <tr class="border-b h-[60px] border-zinc-200 last:border-0">
-                                        <td class="font-bold">
-                                            <p class="text-base text-zinc-700">
-                                                {!! $customAttributeValue['label'] !!}
-                                            </p>
-                                        </td>
-
-                                        @if ($customAttributeValue['type'] == 'file')
-                                            <a
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                                download="{{ $customAttributeValue['label'] }}"
-                                            >
-                                                <span class="icon-download text-2xl"></span>
-                                            </a>
-                                        @elseif ($customAttributeValue['type'] == 'image')
-                                            <a
-                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                                download="{{ $customAttributeValue['label'] }}"
-                                            >
-                                                <img
-                                                    class="h-5 min-h-5 w-5 min-w-5"
-                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
-                                                />
-                                            </a>
-                                        @else
-                                            <td>
-                                                <p class="text-base text-zinc-500 text-right">
-                                                    {!! $customAttributeValue['value'] !!}
-                                                </p>
-                                            </td>
-                                        @endif
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </x-shop::tabs.item>
-                @endif
-
-                <!-- Reviews Tab -->
-                <x-shop::tabs.item
-                    id="review-tab"
-                    class="container mt-[60px] !p-0"
-                    :title="trans('shop::app.products.view.review')"
-                    :is-selected="false"
-                >
-                    @include('shop::products.view.reviews')
-                </x-shop::tabs.item>
-            </x-shop::tabs>
-        </div>
-    </div>
 
     <!-- Information Section -->
-    <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 1180:hidden">
+    <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 max-w-[1000px]">
         <!-- Description Accordion -->
         <x-shop::accordion
-            class="max-md:border-none"
+            class="m-5 max-md:m-2"
             :is-active="true"
         >
-            <x-slot:header class="bg-gray-100 max-md:!py-3 max-sm:!py-2">
-                <p class="text-base font-medium 1180:hidden">
+            <x-slot:header class="bg-gray-100 max-md:!py-3">
+                <p class="text-base font-semibold">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot>
 
-            <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-md:mb-1 max-md:px-4">
+            <x-slot:content class="max-sm:px-0 p-5">
+                <div class="mb-5 text-md text-zinc-500 max-1180:text-sm max-md:mb-1 max-md:px-4">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -184,17 +97,17 @@
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
             <x-shop::accordion
-                class="max-md:border-none"
+                class="m-5 max-md:m-2"
                 :is-active="false"
             >
-                <x-slot:header class="bg-gray-100 max-md:!py-3 max-sm:!py-2">
-                    <p class="text-base font-medium 1180:hidden">
+                <x-slot:header class="bg-gray-100 max-md:!py-3">
+                    <p class="text-base font-semibold">
                         @lang('shop::app.products.view.additional-information')
                     </p>
                 </x-slot>
 
-                <x-slot:content class="max-sm:px-0">
-                        <div class="container max-1180:px-5 flex justify-center">
+                <x-slot:content class="max-sm:px-0 p-5">
+                        <div class="mb-5 flex justify-center max-md:mb-1 max-md:px-4">
                             <table class="table-auto w-full border-1 border-zinc-400">
                                 <tbody>
                                 @foreach ($customAttributeValues as $customAttributeValue)
@@ -240,24 +153,7 @@
             </x-shop::accordion>
         @endif
 
-        <!-- Reviews Accordion -->
-        <x-shop::accordion
-            class="max-md:border-none"
-            :is-active="false"
-        >
-            <x-slot:header
-                class="bg-gray-100 max-md:!py-3 max-sm:!py-2"
-                id="review-accordian-button"
-            >
-                <p class="text-base font-medium">
-                    @lang('shop::app.products.view.review')
-                </p>
-            </x-slot>
-
-            <x-slot:content>
-                @include('shop::products.view.reviews')
-            </x-slot>
-        </x-shop::accordion>
+        
     </div>
 
     <v-product-associations />

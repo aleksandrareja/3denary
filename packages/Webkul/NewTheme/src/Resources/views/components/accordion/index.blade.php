@@ -11,6 +11,7 @@
             <template v-slot:header="{ toggle, isOpen }">
                 <div
                     {{ $header->attributes->merge(['class' => 'flex cursor-pointer select-none items-center justify-between p-4 bg-white']) }}
+                    :class="isOpen ? 'text-goldenOrange' : 'text-zinc-700' "
                     role="button"
                     tabindex="0"
                     @click="toggle"
@@ -18,7 +19,7 @@
                     {{ $header }}
 
                     <span
-                        v-bind:class="isOpen ? 'icon-arrow-up text-2xl' : 'icon-arrow-down text-2xl'"
+                        v-bind:class="isOpen ? 'icon-arrow-up text-2xl text-goldenOrange' : 'icon-arrow-down text-2xl'"
                         role="button"
                         aria-label="Toggle accordion"
                         tabindex="0"

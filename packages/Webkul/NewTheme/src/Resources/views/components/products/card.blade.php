@@ -207,10 +207,11 @@
             <div class="flex flex-col justify-between border-t border-gray-200 bg-white p-3 gap-2">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
-
-                <p class="break-all text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:whitespace-break-spaces max-md:leading-6 max-sm:max-w-[192px] max-sm:text-sm max-sm:leading-4 line-clamp-2">
-                    @{{ product.name }}
-                </p>
+                <div class="min-h-[3rem]">
+                    <p class="text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:leading-6 max-sm:max-w-[192px] max-sm:text-sm max-sm:leading-4 line-clamp-2">
+                        @{{ product.name }}
+                    </p>
+                </div>
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.after') !!}
 
@@ -218,7 +219,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <div
-                    class="flex items-center gap-2.5 text-lg font-semibold max-sm:text-sm max-sm:leading-6"
+                    class="flex items-center gap-2.5 text-lg font-semibold max-sm:text-sm max-sm:leading-6 text-goldenOrange"
                     v-html="product.price_html"
                 >
                 </div>
