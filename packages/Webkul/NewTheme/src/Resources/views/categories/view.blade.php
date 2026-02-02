@@ -47,11 +47,18 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="w-full flex justify-center items-center h-[100px] text-3xl max-sm:text-xl text-navyBlue">
-                {!! $category->description !!}
+            <div class="flex justify-between items-end h-[100px] border-b border-lightGray container max-md:px-4 pb-4">
+                <div class="text-3xl text-navyBlue font-semibold">
+                    {!! $category->description !!}
+                </div>
+                <div class="max-md:hidden items-end">
+                    <v-toolbar @filter-applied='setFilters("toolbar", $event)'></v-toolbar>
+                </div>
             </div>
         @endif
     @endif
+
+
 
     {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
 
@@ -71,16 +78,12 @@
             <div class="container px-[60px] max-lg:px-8 max-md:px-4">
                 <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-10 max-md:flex-col">
                     <!-- Product Listing Filters -->
-                     <div class="w-[280px] max-md:w-full">
+                     <div class="w-[280px] max-md:w-full mt-8">
                         @include('shop::categories.filters')
                     </div>
 
                     <!-- Product Listing Container -->
                     <div class="flex-1 w-full">
-                        <!-- Desktop Product Listing Toolbar -->
-                        <div class="max-md:hidden">
-                            @include('shop::categories.toolbar')
-                        </div>
 
                         <!-- Product List Card Container -->
                         <div
@@ -234,6 +237,12 @@
 
                         loader: false,
                     }
+                },
+
+                mounted() {
+                    this.$emitter.on('toolbar-filter-applied', (filters) => {
+                        this.setFilters('toolbar', filters);
+                    });
                 },
 
                 computed: {

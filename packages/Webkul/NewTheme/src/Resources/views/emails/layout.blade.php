@@ -28,21 +28,11 @@
                 <!-- Email Header -->
                 <div style="margin-bottom: 65px;">
                     <a href="{{ route('shop.home.index') }}">
-                        @if ($logo = core()->getCurrentChannel()->logo_url)
-                            <img
-                                src="{{ $logo }}"
-                                alt="{{ config('app.name') }}"
-                                style="height: 40px; width: 110px;"
-                            />
-                        @else
-                            <img
-                                src="{{ bagisto_asset('images/logo.svg', 'shop') }}"
-                                alt="{{ config('app.name') }}"
-                                width="131"
-                                height="29"
-                                style="width: 156px;height: 40px;"
-                            />
-                        @endif
+                        <img
+                            src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
+                            alt="{{ config('app.name') }}"
+                            style="height: 40px; width: 110px;"
+                        />
                     </a>
                 </div>
 
@@ -54,7 +44,7 @@
                     @lang('shop::app.emails.thanks', [
                         'link' => 'mailto:' . core()->getContactEmailDetails()['email'],
                         'email' => core()->getContactEmailDetails()['email'],
-                        'style' => 'color: #2969FF;'
+                        'style' => 'color: #38200F;'
                     ])
                 </p>
             </div>

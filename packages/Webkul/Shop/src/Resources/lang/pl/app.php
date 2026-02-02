@@ -5,10 +5,10 @@ return [
         'forgot-password' => [
             'already-sent'         => 'Już zresetuj hasło. Wiadomość została wysłana.',
             'back'                 => 'Powrót do logowania?',
-            'bagisto'              => 'Bagisto',
+            'bagisto'              => '3denary',
             'email'                => 'Email',
             'email-not-exist'      => 'Nie możemy znaleźć użytkownika z tym adresem e-mail.',
-            'footer'               => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
+            'footer'               => '© Prawa autorskie - :current_year, 3denary. Wszelkie prawa zastrzeżone.',
             'forgot-password-text' => 'Jeśli zapomniałeś hasła, odzyskaj je, wpisując swój adres e-mail.',
             'page-title'           => 'Zapomniałeś hasła?',
             'reset-link-sent'      => 'Wysłaliśmy link resetowania hasła na Twój adres e-mail.',
@@ -19,21 +19,21 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Powrót do logowania',
-            'bagisto'          => 'Bagisto',
+            'bagisto'          => '3denary',
             'confirm-password' => 'Potwierdź hasło',
             'email'            => 'Zarejestrowany adres e-mail',
-            'footer'           => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
+            'footer'           => '© Prawa autorskie - :current_year, 3denary. Wszelkie prawa zastrzeżone.',
             'password'         => 'Hasło',
             'submit-btn-title' => 'Zresetuj hasło',
             'title'            => 'Zresetuj hasło',
         ],
 
         'login-form' => [
-            'bagisto'             => 'Bagisto',
+            'bagisto'             => '3denary',
             'button-title'        => 'Zaloguj się',
             'create-your-account' => 'Stwórz swoje konto',
             'email'               => 'Email',
-            'footer'              => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
+            'footer'              => '© Prawa autorskie - :current_year, 3denary. Wszelkie prawa zastrzeżone.',
             'forgot-pass'         => 'Zapomniałeś hasła?',
             'form-login-text'     => 'Jeśli masz konto, zaloguj się za pomocą swojego adresu e-mail.',
             'invalid-credentials' => 'Sprawdź swoje dane logowania i spróbuj ponownie.',
@@ -48,14 +48,14 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Masz już konto?',
-            'bagisto'                     => 'Bagisto',
+            'bagisto'                     => '3denary',
             'button-title'                => 'Zarejestruj',
             'click-here'                  => 'Kliknij tutaj',
             'confirm-pass'                => 'Potwierdź hasło',
             'email'                       => 'Email',
             'first-name'                  => 'Imię',
-            'footer'                      => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
-            'form-signup-text'            => 'Jeśli jesteś nowym klientem w naszym sklepie, cieszymy się, że jesteś naszym członkiem.',
+            'footer'                      => '© Prawa autorskie - :current_year, 3denary. Wszelkie prawa zastrzeżone.',
+            'form-signup-text'            => 'Cieszymy się, że jesteś naszym nowym klientem.',
             'last-name'                   => 'Nazwisko',
             'page-title'                  => 'Zostań użytkownikiem',
             'password'                    => 'Hasło',
@@ -537,15 +537,15 @@ return [
                 'customer-service'       => 'Obsługa klienta',
                 'email'                  => 'Email',
                 'footer-content'         => 'Treść stopki',
-                'footer-text'            => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
+                'footer-text'            => '© Prawa autorskie - :current_year, 3denary. Wszelkie prawa zastrzeżone.',
                 'locale'                 => 'Lokalizacja',
-                'newsletter-text'        => 'Bądź gotów na nasz zabawny biuletyn!',
+                'newsletter-text'        => 'Zapisz się do newslettera i otrzymuj informacje o najnowszych ofertach!',
                 'order-return'           => 'Zamówienia i zwroty',
                 'payment-policy'         => 'Polityka płatności',
                 'privacy-cookies-policy' => 'Polityka prywatności i plików cookie',
                 'shipping-policy'        => 'Polityka dostawy',
                 'subscribe'              => 'Zapisz się',
-                'subscribe-newsletter'   => 'Zapisz się na biuletyn',
+                'subscribe-newsletter'   => 'Zapisz się do newslettera',
                 'subscribe-stay-touch'   => 'Zapisz się, aby być w kontakcie.',
                 'whats-new'              => 'Co nowego',
             ],
@@ -937,7 +937,7 @@ return [
             'suspended-account-message' => 'Twoje konto zostało zawieszone',
 
             'index' => [
-                'bagisto'                  => 'Bagisto',
+                'bagisto'                  => '3denary',
                 'cart'                     => 'Koszyk',
                 'continue-shopping'        => 'Kontynuuj zakupy',
                 'empty-product'            => 'Nie masz produktu w koszyku',
@@ -1090,7 +1090,7 @@ return [
     'home' => [
         'contact' => [
             'about'         => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
-            'desc'          => 'Co Cię nurtuje?',
+            'desc'          => 'Masz jakieś pytania?',
             'describe-here' => 'Opisz tutaj',
             'email'         => 'E-mail',
             'message'       => 'Wiadomość',
@@ -1103,7 +1103,7 @@ return [
         'index' => [
             'categories-carousel' => 'Karuzela kategorii',
             'image-carousel'      => 'Karuzela obrazów',
-            'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie, ZAKUP TERAZ',
+            'offer'               => 'Otrzymaj 10% rabatu na pierwsze zamówienie!',
             'product-carousel'    => 'Karuzela produktów',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email'        => 'Zweryfikuj swoje konto e-mail',
@@ -1175,10 +1175,10 @@ return [
                 'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
                 'description'             => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
                 'greeting'                => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
-                'password'                => 'Senha',
+                'password'                => 'Hasło',
                 'sign-in'                 => 'Zaloguj się',
                 'subject'                 => 'Rejestracja nowego klienta',
-                'username'                => 'Nome de usuário/Email',
+                'username'                => 'Nazwa użytkownika/E-mail',
             ],
 
             'forgot-password' => [
@@ -1207,7 +1207,7 @@ return [
             ],
 
             'subscribed' => [
-                'description' => 'Gratulacje i witamy w naszej społeczności newslettera! Jesteśmy podekscytowani, że jesteś z nami i będziemy Cię informować o najnowszych wiadomościach, trendach i ekskluzywnych ofertach.',
+                'description' => 'Gratulacje i witamy w naszej społeczności newslettera! Cieszymy się, że jesteś z nami i będziemy Cię informować o nowościach i ofertach.',
                 'greeting'    => 'Witaj w naszym newsletterze!',
                 'subject'     => 'Zapisano się na nasz newsletter',
                 'unsubscribe' => 'Wypisz się',

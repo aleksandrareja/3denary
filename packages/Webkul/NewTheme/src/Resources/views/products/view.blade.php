@@ -78,7 +78,7 @@
     <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 max-w-[1000px]">
         <!-- Description Accordion -->
         <x-shop::accordion
-            class="m-5 max-md:m-2"
+            class=""
             :is-active="true"
         >
             <x-slot:header class="bg-gray-100 max-md:!py-3">
@@ -97,8 +97,8 @@
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
             <x-shop::accordion
-                class="m-5 max-md:m-2"
-                :is-active="false"
+                class=""
+                :is-active="true"
             >
                 <x-slot:header class="bg-gray-100 max-md:!py-3">
                     <p class="text-base font-semibold">
@@ -300,7 +300,7 @@
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
                                     <!-- Wiersz z przyciskami -->
-                                    <div class="mt-5 flex flex-wrap gap-5 w-full max-w-[470px]">
+                                    <div class="mt-5 flex flex-wrap gap-3 w-full max-w-[470px]">
 
                                         @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                                             {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}

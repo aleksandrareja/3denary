@@ -14,13 +14,12 @@
 
 <!-- Mobile Filters Navigation -->
 <div
-    class="grid mt-2 w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-zinc-200 bg-white ltr:left-0 rtl:right-0"
+    class="flex items-center justify-items-center border-zinc-200 bg-white ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
     <x-shop::drawer
         position="left"
-        width="100%"
         ::is-active="isDrawerActive.filter"
     >
         <!-- Drawer Toggler -->
@@ -31,7 +30,6 @@
             >
                 <span class="icon-filter-1 text-2xl"></span>
 
-                @lang('shop::app.categories.filters.filter')
             </div>
         </x-slot>
 
@@ -64,13 +62,10 @@
         </x-slot>
     </x-shop::drawer>
 
-    <!-- Separator -->
-    <span class="h-5 w-0.5 bg-zinc-200"></span>
 
     <!-- Sort Drawer -->
     <x-shop::drawer
         position="bottom"
-        width="100%"
         ::is-active="isDrawerActive.toolbar"
     >
         <!-- Drawer Toggler -->
@@ -80,8 +75,6 @@
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>
-
-                @lang('shop::app.categories.filters.sort')
             </div>
         </x-slot>
 

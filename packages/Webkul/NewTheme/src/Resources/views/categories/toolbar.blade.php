@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.categories.view.toolbar.before') !!}
 
-<v-toolbar @filter-applied='setFilters("toolbar", $event)'></v-toolbar>
+<v-toolbar></v-toolbar>
 
 {!! view_render_event('bagisto.shop.categories.view.toolbar.after') !!}
 
@@ -13,27 +13,19 @@
     >
         <div>
             <!-- Desktop Toolbar -->
-            <div class="flex justify-between items-center max-md:hidden">
+            <div class="flex items-center justify-end gap-8 max-md:hidden text-sm">
+
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
 
-                <!-- Product Sorting Filters -->
-                <x-shop::dropdown
-                    class="z-[1]"
-                    position="bottom-left"
-                >
+                <!-- Sortowanie -->
+                <x-shop::dropdown class="z-[1]" position="bottom-left">
                     <x-slot:toggle>
-                        <!-- Dropdown Toggler -->
-                        <button class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 text-navyBlue max-md:w-[110px] max-md:pl-2.5 max-md:pr-2.5">
+                        <button class="flex min-w-[180px] items-center justify-between gap-4 text-navyBlue">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
-
-                            <span
-                                class="icon-arrow-down text-2xl text-navyBlue"
-                                role="presentation"
-                            ></span>
+                            <span class="icon-arrow-down text-2xl"></span>
                         </button>
                     </x-slot>
 
-                    <!-- Dropdown Content -->
                     <x-slot:menu>
                         <x-shop::dropdown.menu.item
                             v-for="(sort, key) in filters.available.sort"
@@ -49,60 +41,44 @@
 
                 {!! view_render_event('bagisto.shop.categories.toolbar.pagination.before') !!}
 
-                <!-- Product Pagination Limit -->
-                <div class="flex items-center gap-10">
-                    <!-- Product Pagination Limit -->
-                    <x-shop::dropdown position="bottom-right">
-                        <x-slot:toggle>
-                            <!-- Dropdown Toggler -->
-                            <button class="flex w-full max-w-[200px] text-navyBlue cursor-pointer items-center justify-between gap-4 p-3.5 transition-all max-md:w-[110px] max-md:pl-2.5 max-md:pr-2.5">
-                                @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
+                <!-- Limit -->
+                <x-shop::dropdown position="bottom-right">
+                    <x-slot:toggle class="max-md:hidden">
+                        <button class="flex items-center justify-between gap-4 text-navyBlue">
+                            @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
+                            <span class="icon-arrow-down text-2xl"></span>
+                        </button>
+                    </x-slot>
 
-                                <span
-                                    class="icon-arrow-down text-2xl text-navyBlue"
-                                    role="presentation"
-                                ></span>
-                            </button>
-                        </x-slot>
-
-                        <!-- Dropdown Content -->
-                        <x-slot:menu>
-                            <x-shop::dropdown.menu.item
-                                v-for="(limit, key) in filters.available.limit"
-                                ::class="{'bg-gray-100': limit == filters.applied.limit}"
-                                @click="apply('limit', limit)"
-                            >
-                                @{{ limit }}
-                            </x-shop::dropdown.menu.item>
-                        </x-slot>
-                    </x-shop::dropdown>
-
-                    <!-- Listing Mode Switcher -->
-                    <div class="flex items-center gap-5">
-                        <span
-                            class="cursor-pointer text-2xl text-navyBlue"
-                            role="button"
-                            aria-label="@lang('shop::app.categories.toolbar.list')"
-                            tabindex="0"
-                            :class="(filters.applied.mode === 'list') ? 'icon-listing-fill' : 'icon-listing'"
-                            @click="changeMode('list')"
+                    <x-slot:menu>
+                        <x-shop::dropdown.menu.item
+                            v-for="(limit, key) in filters.available.limit"
+                            ::class="{'bg-gray-100': limit == filters.applied.limit}"
+                            @click="apply('limit', limit)"
                         >
-                        </span>
+                            @{{ limit }}
+                        </x-shop::dropdown.menu.item>
+                    </x-slot>
+                </x-shop::dropdown>
 
-                        <span
-                            class="cursor-pointer text-2xl text-navyBlue"
-                            role="button"
-                            aria-label="@lang('shop::app.categories.toolbar.grid')"
-                            tabindex="0"
-                            :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
-                            @click="changeMode('grid')"
-                        >
-                        </span>
-                    </div>
+                <!-- Grid / List -->
+                <div class="flex items-center gap-4 max-md:hidden">
+                    <span
+                        class="cursor-pointer text-2xl text-navyBlue"
+                        :class="filters.applied.mode === 'list' ? 'icon-listing-fill' : 'icon-listing'"
+                        @click="changeMode('list')"
+                    ></span>
+
+                    <span
+                        class="cursor-pointer text-2xl text-navyBlue"
+                        :class="filters.applied.mode === 'grid' ? 'icon-grid-view-fill' : 'icon-grid-view'"
+                        @click="changeMode('grid')"
+                    ></span>
                 </div>
 
                 {!! view_render_event('bagisto.shop.categories.toolbar.pagination.after') !!}
             </div>
+
 
             <!-- Mobile Toolbar -->
             <div class="md:hidden">
@@ -196,7 +172,7 @@
                         }
                     }
 
-                    this.$emit('filter-applied', {
+                    this.$emitter.emit('toolbar-filter-applied', {
                         default: this.filters.default,
                         applied: filters,
                     });

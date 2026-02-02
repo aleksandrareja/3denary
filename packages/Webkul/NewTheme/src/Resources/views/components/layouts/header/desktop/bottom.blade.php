@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
-<div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
+<div class="container flex min-h-[90px] w-full justify-between px-[60px] max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -16,8 +16,8 @@
 
             <img
                 src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
-                width="131"
-                height="29"
+                width="150"
+                height="40"
                 alt="{{ config('app.name') }}"
             >
         </a>
@@ -289,7 +289,7 @@
                 <span>
                     <a
                         :href="category.url"
-                        class="inline-block px-5 uppercase group-hover:text-navyBlue transition"
+                        class="inline-block px-5 font-medium text-md text-navyBlue transition"
                     >
                         @{{ category.name }}
                     </a>
@@ -340,7 +340,7 @@
                     class="flex h-[77px] cursor-pointer items-center border-b-4 border-transparent hover:border-b-4 hover:border-navyBlue"
                     @click="toggleCategoryDrawer"
                 >
-                    <span class="flex items-center gap-1 px-5 uppercase">
+                    <span class="flex items-center gap-1 px-8 uppercase">
                         <span class="icon-hamburger text-xl"></span>
 
                         @lang('shop::app.components.layouts.header.desktop.bottom.all')

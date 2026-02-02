@@ -35,13 +35,14 @@ module.exports = {
                 darkGreen: '#90785b',
                 transparentOrange:  "rgba(245, 242, 237, 0.61)",
                 transparent:  "rgba(245, 242, 237, 0.2)",
+                orangeBackground: "#F2ECE7",
                 darkBlue: '#0044F2',
                 darkPink: '#F85156',
             },
 
             fontFamily: {
                 poppins: ["Inter", "Lato", "Helvetica", "Arial", "sans-serif"],
-                dmserif: ["DM Serif Display", "serif"],
+                dmserif: ["Bona Nova SC", "serif"],
             },
         }
     },

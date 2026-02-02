@@ -22,10 +22,10 @@
 @endphp
 
 <footer class="mt-9 bg-navyBlue max-sm:mt-10 px-3">
-    <div class="flex flex-wrap justify-between items-start gap-x-10 gap-y-8 p-16 max-lg:justify-center max-md:flex-col max-md:items-center max-md:gap-y-15 max-md:p-10 max-md:px-2">
+    <div class="container flex max-1180:flex-wrap justify-between items-start gap-x-10 gap-y-8 p-16 max-md:gap-y-15 max-md:p-10 max-md:px-2">
 
         <!-- Logo -->
-        <div class="logo max-md:mb-6 flex justify-center">
+        <div class="logo max-md:mb-6 flex justify-center max-1180:w-full">
             <a href="{{ route('shop.home.index') }}">
                 <img  
                     src="{{ asset('storage/channel/'. core()->getCurrentChannel()->id . '/logo3_biale.png') }}" 
@@ -36,10 +36,10 @@
         </div>
 
         <!-- Footer links -->
-        <div class="flex items-start gap-24 max-1180:gap-6 justify-center max-sm:gap-30">
+        <div class="flex items-start gap-10 max-1180:gap-6 justify-between max-sm:gap-30 max-1180:w-full">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-md text-center max-md:text-left max-sm:text-base">
+                    <ul class="grid gap-3 text-sm text-left">
                         @php
                             usort($footerLinkSection, fn($a, $b) => $a['sort_order'] - $b['sort_order']);
                         @endphp
@@ -59,8 +59,8 @@
         <!-- Newsletter subscription -->
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5 max-sm:mt-6">
-                <p class="max-w-[400px] text-3xl text-lightOrange max-md:text-2xl font-semibold">
+            <div class="grid gap-2.5 max-sm:mt-6 max-1180:w-full">
+                <p class="max-w-[400px] text-2xl text-lightOrange font-semibold max-1180:w-full">
                     @lang('shop::app.components.layouts.footer.newsletter-text')
                 </p>
 
@@ -71,12 +71,12 @@
                 <div class="mt-2.5 flex justify-center max-md:justify-start">
                     <x-shop::form
                         :action="route('shop.subscription.store')"
-                        class="w-full max-w-lg"
+                        class="w-full max-w-md"
                     >
                         <div class="flex w-full justify-between gap-4">
                                 <x-shop::form.control-group.control
                                     type="email"
-                                    class="bg-transparent"
+                                    class="bg-transparent border-0 placeholder:text-transparentOrange text-white"
                                     name="email"
                                     rules="required|email"
                                     label="Email"
@@ -100,7 +100,7 @@
     </div>
 
     <!-- Footer bottom -->
-    <div class="flex justify-between border-t border-transparentOrange m-5 px-16 py-3.5 max-md:justify-center max-sm:px-5">
+    <div class="flex border-t border-transparentOrange m-5 px-16 py-3.5 justify-center max-sm:px-5">
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
         <p class="text-sm text-transparentOrange text-center">
             @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])

@@ -32,7 +32,7 @@
                 aria-label="@lang('shop::app.customers.signup-form.bagisto')"
             >
                 <img
-                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
                     alt="{{ config('app.name') }}"
                     width="131"
                     height="29"
@@ -44,7 +44,7 @@
 
         <!-- Form Container -->
 		<div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
-			<h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
+			<h1 class="text-4xl max-md:text-3xl max-sm:text-xl text-navyBlue font-semibold">
                 @lang('shop::app.customers.signup-form.page-title')
             </h1>
 

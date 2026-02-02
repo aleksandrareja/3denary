@@ -19,7 +19,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors.length ? 'border !border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full w-max-[500px] rounded-md px-5 py-3 text-base text-white outline-1 -outline-offset-1 outline-transparentOrange placeholder:text-transparentOrange focus:outline-2 focus:-outline-offset-2 focus:outline-darkGreen sm:text-sm/6']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full w-max-[500px] rounded-md border px-5 py-3 text-base focus:outline-2 focus:-outline-offset-2 focus:outline-darkGreen sm:text-sm/6']) }}
             >
         </v-field>
         @break

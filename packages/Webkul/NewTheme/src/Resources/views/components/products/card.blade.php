@@ -32,7 +32,6 @@
 /* hide back of pane during swap */
 .front, .back {
 	backface-visibility: hidden;
-
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -56,7 +55,7 @@
     >
         <!-- Grid Card -->
         <div
-            class="group w-full border border-gray-200 shadow-sm rounded-md transition-shadow duration-300 hover:shadow-xl overflow-hidden"
+            class="group w-full shadow-sm rounded-md transition-shadow duration-300 hover:shadow-xl overflow-hidden bg-orangeBackground"
             v-if="mode != 'list'"
         >
             <div class="relative w-full overflow-hidden">
@@ -85,11 +84,11 @@
                         />
                     </template> -->
 
-                        <div class="flip-container after:content-[' '] relative bg-white transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flip-container after:content-[' '] relative transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10" ontouchstart="this.classList.toggle('hover');">
                     <div class="flipper justify-center absolute inset-0">
                         <div class="front absolute inset-0">
                             <x-shop::media.images.lazy
-                            class="after:content-[' '] relative bg-white transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10"
+                            class="after:content-[' '] relative transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10"
                             ::src="product.base_image.medium_image_url"
                             ::srcset="`
                                 ${product.base_image.small_image_url} 150w,
@@ -105,7 +104,7 @@
                         </div>
                         <div class="back absolute inset-0">
                             <x-shop::media.images.lazy
-                            class="after:content-[' '] relative bg-white transition-all duration-300 after:block after:pb-[100%] group-hover:scale-10"
+                            class="after:content-[' '] relative transition-all duration-300 after:block after:pb-[100%] group-hover:scale-10"
                             ::src="product.images[1]?.medium_image_url ?? product.base_image.medium_image_url"
                             ::srcset="`
                                 ${product.images[1]?.small_image_url ?? product.base_image.small_image_url} 150w,
@@ -166,13 +165,13 @@
                         @lang('shop::app.components.products.card.new')
                     </p>
 
-                    <div class="opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100 max-lg:opacity-100 max-sm:opacity-100">
+                    <div>
 
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
                         @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                             <span
-                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg md:hidden ltr:right-1.5 rtl:left-1.5"
+                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full bg-white text-lg ltr:right-1.5 rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -204,11 +203,11 @@
             </div>
 
             <!-- Product Information Section -->
-            <div class="flex flex-col justify-between border-t border-gray-200 bg-white p-3 gap-2">
+            <div class="flex flex-col justify-between bg-white p-3 gap-2">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
                 <div class="min-h-[3rem]">
-                    <p class="text-base font-medium max-md:mb-1.5 max-md:max-w-56 max-md:leading-6 max-sm:max-w-[192px] max-sm:text-sm max-sm:leading-4 line-clamp-2">
+                    <p class="text-base font-medium max-md:mb-1.5 max-md:leading-6 max-sm:text-sm line-clamp-2">
                         @{{ product.name }}
                     </p>
                 </div>
@@ -226,8 +225,9 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
-                <!-- Product Actions Section -->
+                <!-- Product Actions Section 
                 <div class="action-items flex items-center justify-between transition-all duration-300 ease-in-out max-md:hidden">
+            
                     @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
@@ -241,6 +241,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
                     @endif
+                
 
                     {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
@@ -273,6 +274,7 @@
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
                 </div>
+                -->
             </div>
         </div>
 
