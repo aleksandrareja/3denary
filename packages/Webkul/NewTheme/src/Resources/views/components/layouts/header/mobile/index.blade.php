@@ -241,7 +241,7 @@
                         @guest('customer')
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="flex text-base font-medium"
+                                class="flex text-base font-medium text-navyBlue"
                             >
                                 @lang('shop::app.components.layouts.header.mobile.login')
 
@@ -414,7 +414,7 @@
                             :class="{'mb-2': category.children && category.children.length}"
                         >
                             <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
-                                <a :href="category.url" class="text-base font-medium text-black">
+                                <a :href="category.url" class="text-xl text-darkBrown font-dmserif">
                                     @{{ category.name }}
                                 </a>
                             </div>

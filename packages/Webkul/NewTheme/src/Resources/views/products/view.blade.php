@@ -57,7 +57,7 @@
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
-        <div class="flex justify-center px-7 max-lg:hidden">
+        <div class="flex justify-center px-7 max-lg:hidden text-navyBlue">
             <x-shop::breadcrumbs
                 name="product"
                 :entity="$product"
@@ -82,7 +82,7 @@
             :is-active="true"
         >
             <x-slot:header class="bg-gray-100 max-md:!py-3">
-                <p class="text-base font-semibold">
+                <p class="text-xl font-dmserif">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot>
@@ -101,7 +101,7 @@
                 :is-active="true"
             >
                 <x-slot:header class="bg-gray-100 max-md:!py-3">
-                    <p class="text-base font-semibold">
+                    <p class="text-xl font-dmserif">
                         @lang('shop::app.products.view.additional-information')
                     </p>
                 </x-slot>
@@ -195,7 +195,7 @@
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="break-words text-3xl font-medium">
+                                    <h1 class="break-words text-3xl font-medium text-navyBlue">
                                         {{ $product->name }}
                                     </h1>
 

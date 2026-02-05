@@ -48,7 +48,7 @@
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
             <div class="flex justify-between items-end h-[100px] border-b border-lightGray container max-md:px-4 pb-4">
-                <div class="text-3xl text-navyBlue font-semibold">
+                <div class="text-4xl text-gray-700">
                     {!! $category->description !!}
                 </div>
                 <div class="max-md:hidden items-end">

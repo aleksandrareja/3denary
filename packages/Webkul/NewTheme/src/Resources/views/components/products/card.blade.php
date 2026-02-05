@@ -55,7 +55,7 @@
     >
         <!-- Grid Card -->
         <div
-            class="group w-full shadow-sm rounded-md transition-shadow duration-300 hover:shadow-xl overflow-hidden bg-orangeBackground"
+            class="group w-full shadow-sm rounded-md transition-shadow duration-300 hover:shadow-xl overflow-hidden"
             v-if="mode != 'list'"
         >
             <div class="relative w-full overflow-hidden">

@@ -13,14 +13,14 @@
     >
         <div>
             <!-- Desktop Toolbar -->
-            <div class="flex items-center justify-end gap-8 max-md:hidden text-sm">
+            <div class="flex items-center justify-end gap-8 max-md:hidden text-sm font-medium text-gray-700">
 
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
 
                 <!-- Sortowanie -->
                 <x-shop::dropdown class="z-[1]" position="bottom-left">
                     <x-slot:toggle>
-                        <button class="flex min-w-[180px] items-center justify-between gap-4 text-navyBlue">
+                        <button class="flex min-w-[180px] items-center justify-between gap-4">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
                             <span class="icon-arrow-down text-2xl"></span>
                         </button>
@@ -44,7 +44,7 @@
                 <!-- Limit -->
                 <x-shop::dropdown position="bottom-right">
                     <x-slot:toggle class="max-md:hidden">
-                        <button class="flex items-center justify-between gap-4 text-navyBlue">
+                        <button class="flex items-center justify-between gap-4">
                             @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
                             <span class="icon-arrow-down text-2xl"></span>
                         </button>
@@ -64,13 +64,13 @@
                 <!-- Grid / List -->
                 <div class="flex items-center gap-4 max-md:hidden">
                     <span
-                        class="cursor-pointer text-2xl text-navyBlue"
+                        class="cursor-pointer text-2xl"
                         :class="filters.applied.mode === 'list' ? 'icon-listing-fill' : 'icon-listing'"
                         @click="changeMode('list')"
                     ></span>
 
                     <span
-                        class="cursor-pointer text-2xl text-navyBlue"
+                        class="cursor-pointer text-2xl"
                         :class="filters.applied.mode === 'grid' ? 'icon-grid-view-fill' : 'icon-grid-view'"
                         @click="changeMode('grid')"
                     ></span>

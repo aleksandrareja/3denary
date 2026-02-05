@@ -16,7 +16,7 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <p class="text-xl max-md:text-lg max-sm:text-md !text-gray-800 font-semibold">
+                <p class="text-2xl max-md:text-xl max-sm:text-lg !text-gray-700 font-dmserif">
                     @{{ title }}
                 </p>
 
@@ -26,7 +26,7 @@
                         class="hidden max-lg:flex"
                         v-if="navigationLink"
                     >
-                        <p class="items-center text-lg max-md:text-sm !text-zinc-800">
+                        <p class="items-center text-lg max-md:text-xs !text-zinc-700">
                             @lang('shop::app.components.products.carousel.view-all')
 
                             <span class="icon-arrow-right text-2xl max-md:text-lg max-sm:text-sm"></span>
@@ -69,7 +69,7 @@
 
             <a
                 :href="navigationLink"
-                class="bg-goldenOrange hover:bg-darkGreen text-lightOrange font-semibold transition mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
+                class="bg-goldenOrange hover:bg-darkGreen text-lightOrange font-semibold transition mx-auto mt-5 block w-max rounded-lg px-11 py-3 text-center max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
                 :aria-label="title"
                 v-if="navigationLink"
             >
