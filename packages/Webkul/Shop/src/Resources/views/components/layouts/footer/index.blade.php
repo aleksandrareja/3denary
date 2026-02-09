@@ -80,9 +80,20 @@
             </x-slot>
         </x-shop::accordion>
 
-        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
 
-        <!-- News Letter subscription -->
+
+        <div class="grid gap-2.5">
+            <p
+                    class="max-w-[288px] text-md"
+                    aria-level="2"
+                >
+                3Denary to sklep z pasją do numizmatyki. Oferujemy polskie i zagraniczne monety kolekcjonerskie – historyczne i współczesne, złote, srebrne i obiegowe. Naszym celem jest dostarczanie Klientom wyjątkowych monet, które zachwycają pięknem wykonania i wartością historyczną.
+            </p>
+        </div>
+
+        <!-- News Letter subscription 
+         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
+         
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-2.5">
                 <p
@@ -128,6 +139,7 @@
         @endif
 
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
+-->
     </div>
 
     <div class="flex justify-between bg-[#F1EADF] px-[60px] py-3.5 max-md:justify-center max-sm:px-5">

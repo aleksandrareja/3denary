@@ -251,7 +251,7 @@
 
                         @auth('customer')
                             <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
-                                <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="font-mediums break-all text-2xl max-md:text-xl">Witaj {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-zinc-500 no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
@@ -273,7 +273,7 @@
                     </label>
 
                     <div class="relative w-full p-2.5">
-                        <div class="icon-search pointer-events-none absolute top-5 flex items-center text-2xl max-md:text-xl max-sm:top-4 ltr:left-3 rtl:right-3"></div>
+                        <div class="icon-search pointer-events-none absolute top-5 flex items-center text-2xl max-md:text-xl ltr:left-4 rtl:right-3"></div>
 
                         <input
                             type="text"

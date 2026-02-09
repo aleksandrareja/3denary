@@ -54,7 +54,7 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
                     <div class="flex items-center justify-between">
-                        <p class="text-2xl font-medium max-md:text-xl max-sm:text-xl">
+                        <p class="text-2xl max-md:text-xl max-sm:text-xl font-dmserif">
                             @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                         </p>
                     </div>
@@ -177,7 +177,7 @@
                                                     <template v-if="attribute?.attribute_type === 'file'">
                                                         <a
                                                             :href="attribute.file_url"
-                                                            class="text-blue-700"
+                                                            class="text-goldenOrange"
                                                             target="_blank"
                                                             :download="attribute.file_name"
                                                         >
@@ -216,7 +216,7 @@
                                 <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
-                                    class="text-blue-700 max-md:text-sm"
+                                    class="text-goldenOrange max-md:text-sm"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.mini-cart.remove')

@@ -69,7 +69,7 @@
 
             <a
                 :href="navigationLink"
-                class="bg-goldenOrange hover:bg-darkGreen text-lightOrange font-semibold transition mx-auto mt-5 block w-max rounded-lg px-11 py-3 text-center max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
+                class="primary-button font-semibold transition mx-auto mt-5 block w-max rounded-lg px-11 py-3 text-center max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
                 :aria-label="title"
                 v-if="navigationLink"
             >

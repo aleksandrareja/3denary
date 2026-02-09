@@ -37,7 +37,7 @@ module.exports = {
                 transparentOrange:  "rgba(245, 242, 237, 0.61)",
                 transparent:  "rgba(245, 242, 237, 0.2)",
                 orangeBackground: "#F2ECE7",
-                darkBlue: '#0044F2',
+                darkBlue: 'rgba(196, 154, 54, 1)',
                 darkPink: '#F85156',
             },
 
