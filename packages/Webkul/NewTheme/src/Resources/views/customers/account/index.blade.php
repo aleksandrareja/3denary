@@ -20,7 +20,7 @@
     <!--Customers logout-->
     @auth('customer')
         <div class="mx-4">
-            <div class="mx-auto w-[400px] rounded-lg border border-navyBlue py-2.5 text-center max-sm:w-full max-sm:py-1.5">
+            <div class="secondary-button mx-auto w-[400px] rounded-lg border border-navyBlue py-2.5 text-center max-sm:w-full max-sm:py-1.5">
                 <x-shop::form
                     method="DELETE"
                     action="{{ route('shop.customer.session.destroy') }}"
@@ -28,7 +28,7 @@
                 />
 
                 <a
-                    class="flex items-center justify-center gap-1.5 text-base hover:bg-gray-100"
+                    class="flex items-center justify-center gap-1.5 text-base"
                     href="{{ route('shop.customer.session.destroy') }}"
                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                 >

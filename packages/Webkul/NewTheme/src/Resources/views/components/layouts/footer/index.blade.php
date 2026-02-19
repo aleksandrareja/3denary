@@ -60,7 +60,7 @@
 
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-3 text-sm max-md:min-w-[140px] max-md:gap-2">
+                    <ul class="grid gap-3 text-sm md:min-w-[140px] max-md:gap-2">
                         @php
                             usort($footerLinkSection, fn($a, $b) => $a['sort_order'] - $b['sort_order']);
                         @endphp

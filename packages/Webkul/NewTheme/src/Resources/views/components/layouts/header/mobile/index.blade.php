@@ -230,7 +230,7 @@
             <x-slot:content class="!p-0">
                 <!-- Account Profile Hero Section -->
                 <div class="border-b border-zinc-200 p-4">
-                    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
+                    <div class="grid grid-cols-[auto_1fr] items-center gap-4 p-2.5">
                         <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -272,12 +272,12 @@
                         @lang('shop::app.components.layouts.header.mobile.search')
                     </label>
 
-                    <div class="relative w-full p-2.5">
-                        <div class="icon-search pointer-events-none absolute top-5 flex items-center text-2xl max-md:text-xl ltr:left-4 rtl:right-3"></div>
+                    <div class="relative w-full p-4">
+                        <div class="icon-search pointer-events-none absolute p-2.5 flex items-center text-2xl max-md:text-xl ltr:left-4 rtl:right-3"></div>
 
                         <input
                             type="text"
-                            class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                            class="block w-full rounded-xl bg-gray-50 px-11 py-3.5 text-sm font-medium text-gray-900 outline-none focus:ring-2 focus:ring-goldenOrange transition-all duration-300 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                             name="query"
                             value="{{ request('query') }}"
                             placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
@@ -414,7 +414,7 @@
                             :class="{'mb-2': category.children && category.children.length}"
                         >
                             <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
-                                <a :href="category.url" class="text-xl text-darkBrown font-dmserif">
+                                <a :href="category.url" class="text-xl text-darkBrown font-dmserif hover:text-goldenOrange transition-all duration-200">
                                     @{{ category.name }}
                                 </a>
                             </div>

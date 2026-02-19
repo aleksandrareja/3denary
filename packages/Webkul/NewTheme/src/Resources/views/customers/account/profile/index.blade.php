@@ -121,11 +121,7 @@
             <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-lg">
-                            @lang('shop::app.customers.account.profile.index.delete-profile')
-                        </div>
-
-                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full max-md:py-1.5 md:hidden">
+                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full max-md:py-1.5">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
                     </x-slot>

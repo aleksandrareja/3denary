@@ -45,21 +45,7 @@
 
     {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
 
-    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
-        @if ($category->description)
-            <div class="flex justify-between items-end h-[100px] border-b border-lightGray container max-md:px-4 pb-4">
-                <div class="text-4xl text-gray-700">
-                    {!! $category->description !!}
-                </div>
-                <div class="max-md:hidden items-end">
-                    <v-toolbar @filter-applied='setFilters("toolbar", $event)'></v-toolbar>
-                </div>
-            </div>
-        @endif
-    @endif
-
-
-
+    
     {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
@@ -76,9 +62,31 @@
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-md:px-4">
+                <!-- CATEGORY HEADER -->
+                @if ($category->description)
+                <div class="flex justify-between items-end border-b border-lightGray pb-4 mt-10">
+
+                    <!-- Description -->
+                    <div class="text-4xl text-gray-700">
+                        {!! $category->description !!}
+                    </div>
+
+                    <!-- Desktop toolbar -->
+                    <div class="max-md:hidden">
+                        <v-toolbar @filter-applied="setFilters('toolbar', $event)"></v-toolbar>
+                    </div>
+
+                    <!-- Mobile filter + sort icons -->
+                    <div class="md:hidden">
+                        @include('shop::categories.filters')
+                    </div>
+
+                </div>
+                @endif
+
                 <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-10 max-md:flex-col">
                     <!-- Product Listing Filters -->
-                     <div class="w-[280px] max-md:w-full mt-8">
+                     <div class="max-md:hidden w-[280px] max-md:w-full mt-8">
                         @include('shop::categories.filters')
                     </div>
 

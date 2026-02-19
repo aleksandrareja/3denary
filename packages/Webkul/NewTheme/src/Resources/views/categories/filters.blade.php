@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
 <!-- Desktop Filters Navigation -->
-<div v-if="! isMobile">
+<div class="max-md:hidden">
     <!-- Filters Vue Component -->
     <v-filters
         @filter-applied="setFilters('filter', $event)"
@@ -14,8 +14,7 @@
 
 <!-- Mobile Filters Navigation -->
 <div
-    class="flex items-center justify-items-center border-zinc-200 bg-white ltr:left-0 rtl:right-0"
-    v-if="isMobile"
+    class="md:hidden flex items-center justify-items-center border-zinc-200 bg-white ltr:left-0 rtl:right-0"
 >
     <!-- Filter Drawer -->
     <x-shop::drawer
@@ -25,7 +24,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium text-gray-700 uppercase max-md:py-3"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-2xl"></span>
@@ -71,7 +70,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium text-gray-700 uppercase max-md:py-3"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>

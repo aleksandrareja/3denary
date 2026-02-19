@@ -54,7 +54,7 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
                     <div class="flex items-center justify-between">
-                        <p class="text-2xl max-md:text-xl max-sm:text-xl font-dmserif">
+                        <p class="text-2xl max-md:text-xl max-sm:text-xl font-dmserif font-normal">
                             @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                         </p>
                     </div>
