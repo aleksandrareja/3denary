@@ -79,4 +79,11 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect'      => env('GITHUB_CALLBACK_URL'),
     ],
+
+    'inpost' => [
+    'shipx_token' => env('INPOST_SHIPX_TOKEN'),
+    'geo_token' => env('INPOST_GEO_TOKEN'),
+    'organization_id' => env('INPOST_ORGANIZATION_ID'),
+    'mode' => env('INPOST_MODE', 'production'),
+    ],
 ];

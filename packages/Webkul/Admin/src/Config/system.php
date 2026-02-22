@@ -1766,6 +1766,12 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.logo',
+                'type'          => 'file',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
                 'name'    => 'type',
                 'title'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type.title',
                 'type'    => 'select',

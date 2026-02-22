@@ -63,7 +63,16 @@
                                         class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
-                                        <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                        <template v-if="rate.image">
+                                            <img 
+                                                :src="rate.image" 
+                                                :alt="rate.method_title"
+                                                class="max-h-20 max-w-30"
+                                            />
+                                        </template>
+                                        <template v-else>
+                                            <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                        </template>
 
                                         <div>
                                             <p class="mt-1.5 text-2xl font-semibold max-md:text-base">
@@ -71,7 +80,7 @@
                                             </p>
                                             
                                             <p class="mt-2.5 text-xs font-medium max-md:mt-1 max-sm:mt-0 max-sm:font-normal max-sm:text-zinc-500">
-                                                <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
+                                                <span class="font-medium">@{{ rate.method_title }}</span>
                                             </p>
                                         </div>
                                     </label>
@@ -83,6 +92,7 @@
                     </x-slot>
                 </x-shop::accordion>
             </template>
+
         </div>
     </script>
 
@@ -102,11 +112,29 @@
 
             methods: {
                 store(selectedMethod) {
+                    // Walidacja paczkomatu dla metody Inpost
+                    if (selectedMethod.includes('custom_express_shipping')) {
+                        const inpostInput = document.getElementById('inpost_locker_id');
+                        if (!inpostInput || !inpostInput.value || inpostInput.value.trim() === '') {
+                            const errorEl = document.getElementById('inpost-error');
+                            if (errorEl) errorEl.style.display = 'block';
+                            return;
+                        }
+                    }
+
                     this.$emit('processing', 'payment');
 
-                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
-                            shipping_method: selectedMethod,
-                        })
+                    const postData = {
+                        shipping_method: selectedMethod,
+                    };
+
+                    // Dodaj dane paczkomatu jeśli zostały wybrane
+                    const inpostInput = document.getElementById('inpost_locker_id');
+                    if (inpostInput && inpostInput.value) {
+                        postData.inpost_locker_id = inpostInput.value;
+                    }
+
+                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", postData)
                         .then(response => {
                             if (response.data.redirect_url) {
                                 window.location.href = response.data.redirect_url;

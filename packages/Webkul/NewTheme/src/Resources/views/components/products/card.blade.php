@@ -67,24 +67,8 @@
                     :aria-label="product.name + ' '"
                     :class="{ 'pointer-events-none opacity-50': !product.is_saleable }"
                 >
-                    <!-- <template v-if="product.attribute_family_id === 2">
-                        <x-shop::media.images.lazy
-                            class="after:content-[' '] relative bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10"
-                            ::src="product.base_image.medium_image_url"
-                            ::srcset="`
-                                ${product.base_image.small_image_url} 150w,
-                                ${product.base_image.medium_image_url} 300w,
-                            `"
-                            sizes="(max-width: 768px) 150px, (max-width: 1200px) 300px, 600px"
-                            ::key="product.id"
-                            ::index="product.id"
-                            width="291"
-                            height="300"
-                            ::alt="product.name"
-                        />
-                    </template> -->
 
-                        <div class="flip-container after:content-[' '] relative transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-container after:content-[' '] relative transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-10" ontouchstart="this.classList.toggle('hover');">
                     <div class="flipper justify-center absolute inset-0">
                         <div class="front absolute inset-0">
                             <x-shop::media.images.lazy

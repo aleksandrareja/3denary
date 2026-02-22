@@ -95,7 +95,9 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\NewTheme\\": "packages/Webkul/NewTheme/src"
+            "Webkul\\NewTheme\\": "packages/Webkul/NewTheme/src",
+            "Webkul\\CustomPrzelewy24Payment\\": "packages/Webkul/CustomPrzelewy24Payment/src",
+            "Webkul\\CustomInpostPaczkomatyShipping\\": "packages/Webkul/CustomInpostPaczkomatyShipping/src"
 
         }
     },

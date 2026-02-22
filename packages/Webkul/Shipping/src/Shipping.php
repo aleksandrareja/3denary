@@ -111,6 +111,16 @@ class Shipping
             }
 
             $rate['base_formatted_price'] = core()->currency($rate->base_price);
+            
+            // Add image from config if available
+            $configImage = core()->getConfigData("sales.carriers.{$rate->carrier}.image");
+            if ($configImage) {
+                // Ensure the path has storage/ prefix for proper URL generation
+                if (strpos($configImage, 'storage/') === false) {
+                    $configImage = 'storage/' . $configImage;
+                }
+                $rate['image'] = url($configImage);
+            }
 
             $rates[$rate->carrier]['rates'][] = $rate;
         }
