@@ -84,6 +84,9 @@
                                             </p>
                                         </div>
                                     </label>
+
+                                    <!-- InPost Widget -->
+                                    @include('paczkomaty::checkout.inpost-widget')
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
@@ -96,8 +99,6 @@
         </div>
     </script>
 
-    <!-- InPost Widget -->
-    @include('paczkomaty::checkout.inpost-widget')
     
     <script type="module">
         app.component('v-shipping-methods', {
