@@ -166,7 +166,7 @@
                         this.widgetInstance = null;
                     }
 
-                    const container = document.getElementById('geowidget');
+                    const container = this.$refs.geowidgetContainer;
                     if (container) container.innerHTML = '';
 
                     this.selectedLocker = null;
