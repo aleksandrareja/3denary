@@ -35,81 +35,64 @@ console.log('InPost widget blade loaded');
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let widgetInstance = null;
+    let widgetInstance = null;
 
-        // Funkcja sprawdzająca czy wybrano InPost
-        function checkShippingMethod() {
-            // Szukamy zaznaczonego inputa wysyłki
-            const selectedMethod = document.querySelector('input[name="shipping_method"]:checked');
-            const container = document.getElementById('inpost-map-container');
-            
-            console.log('Selected method value:', selectedMethod ? selectedMethod.value : 'none');
-            console.log('Looking for: custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping');
-            
-            // Wartość musi być zgodna z tym, co zwraca metoda calculate() w Carrierze
-            if (selectedMethod && selectedMethod.value === "custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping") {
-                console.log('InPost method selected - showing widget');
-                container.style.display = 'block';
-                
-                // Inicjalizujemy widget tylko raz
-                if (!widgetInstance) {
+    function checkShippingMethod() {
+        const selectedMethod = document.querySelector('input[name="shipping_method"]:checked');
+        const container = document.getElementById('inpost-map-container');
+
+        if (!container) return;
+
+        if (selectedMethod && selectedMethod.value === "custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping") {
+            container.style.display = 'block';
+
+            if (!widgetInstance) {
+                setTimeout(() => {
                     initInPostWidget();
-                }
-            } else {
-                console.log('Other method selected - hiding widget');
-                if (container) container.style.display = 'none';
+                }, 100);
             }
+        } else {
+            container.style.display = 'none';
         }
+    }
 
-        function initInPostWidget() {
-            const config = {
-                // Pobiera token GEO API z Twojej konfiguracji w adminie
-                token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
-                language: "pl",
-                config: "parcelcollect"
-            };
+    function initInPostWidget() {
+        if (!document.getElementById('geowidget')) return;
 
-            widgetInstance = new InPostGeowidget(config, (station) => {
-                const paczkomatId = station.name;
-                const details = `${station.name}, ${station.address.line1}, ${station.address.line2}`;
+        const config = {
+            token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
+            language: "pl",
+            config: "parcelcollect"
+        };
 
-                // Wyświetlamy informację pod mapą
-                const infoBox = document.getElementById('selected-paczkomat-name');
-                infoBox.innerText = "Wybrano: " + details;
-                infoBox.style.display = 'block';
+        widgetInstance = new InPostGeowidget(config, (station) => {
+            const paczkomatId = station.name;
+            const details = `${station.name}, ${station.address.line1}, ${station.address.line2}`;
 
-                // AJAX: Wysyłamy dane do Twojego kontrolera, aby zapisać je w tabeli 'addresses'
-                fetch("{{ route('inpost.save_paczkomat') }}", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        paczkomat_id: paczkomatId,
-                        paczkomat_details: details
-                    })
+            const infoBox = document.getElementById('selected-paczkomat-name');
+            infoBox.innerText = "Wybrano: " + details;
+            infoBox.style.display = 'block';
+
+            fetch("{{ route('inpost.save_paczkomat') }}", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    paczkomat_id: paczkomatId,
+                    paczkomat_details: details
                 })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Status zapisu InPost:", data.message);
-                })
-                .catch(error => console.error('Błąd zapisu paczkomatu:', error));
             });
-
-            widgetInstance.render(document.getElementById('geowidget'));
-        }
-
-        // Ponieważ Bagisto to SPA (Vue.js), musimy nasłuchiwać zmian w dokumentach
-        // Event 'change' na body wyłapie zmianę wyboru metody wysyłki
-        document.body.addEventListener('change', function(e) {
-            if (e.target.name === 'shipping_method') {
-                checkShippingMethod();
-            }
         });
 
-        // Uruchamiamy sprawdzenie na starcie (np. przy odświeżeniu strony)
-        setTimeout(checkShippingMethod, 2000);
+        widgetInstance.render(document.getElementById('geowidget'));
+    }
+
+    // Nasłuchiwanie zmian (ważne w SPA)
+    document.addEventListener('change', function(e) {
+        if (e.target.name === 'shipping_method') {
+            setTimeout(checkShippingMethod, 100);
+        }
     });
 </script>
