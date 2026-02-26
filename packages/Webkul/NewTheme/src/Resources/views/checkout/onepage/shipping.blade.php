@@ -92,14 +92,7 @@
                     </x-slot>
                 </x-shop::accordion>
 
-                <!-- Inpost Widget Blade Component -->
-                <div v-if="inpostSelected" class="mt-6">
-                    <div ref="geowidgetContainer"></div>
-
-                    <div v-if="selectedLocker" class="mt-3 p-3 bg-green-600 text-white rounded">
-                        Wybrano: @{{ selectedLocker }}
-                    </div>
-                </div>
+                <v-inpost-widget :method="selectedMethod" />
             </template>
         </div>
     </script>
@@ -121,9 +114,6 @@
             data() {
                 return {
                     selectedMethod: null,
-                    selectedLocker: null,
-                    widgetInstance: null,
-                    inpostSelected: false,
                 };
             },
 
@@ -131,52 +121,116 @@
 
             methods: {
                 store(selectedMethod) {
-
                     this.selectedMethod = selectedMethod;
-                    this.inpostSelected = selectedMethod.includes('custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping');
 
-                    this.$nextTick(() => {
-                        if (this.inpostSelected) {
-                            this.initGeowidget();
-                        } else {
-                            this.destroyGeowidget();
-                        }
-                    });
+                    this.$emit('processing', 'payment');
+
+                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {
+                            shipping_method: selectedMethod
+                        })
+                        .then(response => {
+                            this.$emit('processed', 'payment');
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            this.$emit('processed', 'payment');
+                        });
                 },
 
-                initGeowidget() {
-                    if (this.widgetInstance) return;
+        }});
 
-                    const container = this.$refs.geowidgetContainer;
-                    if (!container) return;
 
-                    const config = {
-                        token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
-                        language: "pl",
-                        config: "parcelcollect"
-                    };
+app.component('v-inpost-widget', {
 
-                    this.widgetInstance = new InPostGeowidget(config, (station) => {
+    template: `
+        <div v-if="visible" class="mt-6">
+            <div ref="geowidgetContainer" style="height:400px;"></div>
 
-                        const details = `${station.name}, ${station.address.line1}`;
-                        this.selectedLocker = details;
+            <div v-if="selectedLocker"
+                 class="mt-3 p-3 bg-green-600 text-white rounded">
+                Wybrano: {{ selectedLocker }}
+            </div>
+        </div>
+    `,
 
-                        // tutaj możesz zapisać locker przez axios
-                    });
+    props: {
+        method: {
+            type: String,
+            required: true
+        }
+    },
 
-                    this.widgetInstance.render(container);
-                },
+    data() {
+        return {
+            visible: false,
+            selectedLocker: null,
+            widgetInstance: null
+        }
+    },
 
-                destroyGeowidget() {
-                    if (this.widgetInstance) {
-                        this.widgetInstance = null;
-                    }
+    mounted() {
+    console.log("Widget mounted, method:", this.method);
+},
 
-                    const container = this.$refs.geowidgetContainer;
-                    if (container) container.innerHTML = '';
+    watch: {
+        method: {
+        immediate: true,
+        handler(newVal) {
 
-                    this.selectedLocker = null;
+            this.visible = newVal && newVal.includes('custom_inpostpaczkomaty_shipping');
+
+            this.$nextTick(() => {
+
+                if (this.visible) {
+                    this.initWidget();
+                } else {
+                    this.destroyWidget();
                 }
-        });
+                console.log("Method changed:", newVal);
+
+            });
+        }
+    }
+    },
+
+    methods: {
+
+        initWidget() {
+
+            if (this.widgetInstance) return;
+
+            const container = this.$refs.geowidgetContainer;
+            if (!container) return;
+
+            const config = {
+                token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
+                language: "pl",
+                config: "parcelcollect"
+            };
+
+            this.widgetInstance = new InPostGeowidget(config, (station) => {
+
+                this.selectedLocker =
+                    `${station.name}, ${station.address.line1}`;
+
+            });
+
+            this.widgetInstance.render(container);
+        },
+
+        destroyWidget() {
+
+            if (this.widgetInstance) {
+                this.widgetInstance = null;
+            }
+
+            if (this.$refs.geowidgetContainer) {
+                this.$refs.geowidgetContainer.innerHTML = '';
+            }
+
+            this.selectedLocker = null;
+        }
+    }
+});
     </script>
 @endPushOnce
