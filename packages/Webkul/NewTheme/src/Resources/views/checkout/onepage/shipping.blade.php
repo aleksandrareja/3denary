@@ -13,56 +13,46 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-methods-template">
-        <div class="mb-7 max-md:mb-0">
+        <div class="mb-7">
             <template v-if="! methods">
                 <x-shop::shimmer.checkout.onepage.shipping-method />
             </template>
 
             <template v-else>
-                <x-shop::accordion class="overflow-hidden !border-b-0 max-md:rounded-lg">
-                    <x-slot:header class="px-0 py-4">
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-2xl font-medium">@lang('shop::app.checkout.onepage.shipping.shipping-method')</h2>
-                        </div>
+                <x-shop::accordion>
+                    <x-slot:header>
+                        <h2 class="text-2xl font-medium">@lang('shop::app.checkout.onepage.shipping.shipping-method')</h2>
                     </x-slot>
 
-                    <x-slot:content class="mt-8 !p-0">
+                    <x-slot:content>
                         <div class="flex flex-wrap gap-8">
-                            <div 
-                                v-for="method in methods" 
-                                class="flex flex-wrap gap-8 w-full"
-                            >
-                                <div
-                                    class="relative max-w-[218px] select-none w-full"
-                                    v-for="rate in method.rates"
-                                >
+                            <template v-for="method in methods">
+                                <div v-for="rate in method.rates" class="relative">
                                     <input 
                                         type="radio"
                                         name="shipping_method"
                                         :id="rate.method"
                                         :value="rate.method"
                                         class="peer hidden"
-                                        :checked="rate.method == selectedMethod"
                                         @change="store(rate.method)"
+                                        :checked="rate.method == selectedMethod"
                                     >
-
-                                    <label :for="rate.method" class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"></label>
-
-                                    <label :for="rate.method" class="block cursor-pointer rounded-xl border border-zinc-200 p-5">
-                                        <template v-if="rate.image">
-                                            <img :src="rate.image" class="max-h-20 max-w-30" />
-                                        </template>
-                                        <p class="mt-1.5 text-2xl font-semibold">@{{ rate.base_formatted_price }}</p>
-                                        <p class="mt-2.5 text-xs font-medium">@{{ rate.method_title }}</p>
+                                    <label :for="rate.method" class="block cursor-pointer rounded-xl border p-5 peer-checked:border-navyBlue">
+                                        <p class="font-semibold">@{{ rate.method_title }}</p>
+                                        <p>@{{ rate.base_formatted_price }}</p>
                                     </label>
                                 </div>
-                            </div>
+                            </template>
                         </div>
 
-                        <v-inpost-widget 
-                            v-if="selectedMethod && selectedMethod.includes('custom_inpostpaczkomaty_shipping')"
-                            :method="selectedMethod"
-                        ></v-inpost-widget>
+                        <div v-show="isInPostSelected" class="mt-8 p-4 border rounded-lg bg-gray-50">
+                            <h3 class="font-bold mb-2">Wybierz Paczkomat:</h3>
+                            <div id="geowidget-container" ref="inpostMap" style="height: 400px; width: 100%;"></div>
+                            
+                            <div v-if="selectedLocker" class="mt-4 p-3 bg-green-100 text-green-800 rounded">
+                                <strong>Wybrany punkt:</strong> @{{ selectedLocker }}
+                            </div>
+                        </div>
                     </x-slot>
                 </x-shop::accordion>
             </template>
@@ -72,56 +62,58 @@
     <script type="module">
         app.component('v-shipping-methods', {
             template: '#v-shipping-methods-template',
+
             props: ['methods'],
+
             data() {
                 return {
                     selectedMethod: "{{ cart()->getCart() ? cart()->getCart()->shipping_method : '' }}",
+                    selectedLocker: null,
+                    widgetInstance: null
                 };
             },
+
+            computed: {
+                // Czy wybrano metodę InPost?
+                isInPostSelected() {
+                    return this.selectedMethod && this.selectedMethod.includes('custom_inpostpaczkomaty_shipping');
+                }
+            },
+
+            watch: {
+                // Reagujemy na zmianę metody
+                selectedMethod(newVal) {
+                    if (this.isInPostSelected) {
+                        this.$nextTick(() => this.initInPost());
+                    }
+                }
+            },
+
+            mounted() {
+                if (this.isInPostSelected) {
+                    this.initInPost();
+                }
+            },
+
             methods: {
                 store(method) {
                     this.selectedMethod = method;
                     this.$emit('processing', 'payment');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {
-                        shipping_method: method
-                    })
-                    .then(response => {
-                        this.$emit('processed', 'payment');
-                    })
-                    .catch(error => {
-                        this.$emit('processed', 'payment');
-                    });
-                }
-            }
-        });
+                            shipping_method: method
+                        })
+                        .then(response => {
+                            this.$emit('processed', 'payment');
+                        })
+                        .catch(error => {
+                            this.$emit('processed', 'payment');
+                        });
+                },
 
-        app.component('v-inpost-widget', {
-            template: `
-                <div class="mt-6 p-4 border rounded-lg bg-gray-50">
-                    <h3 class="mb-4 font-bold">Wybierz swój Paczkomat:</h3>
-                    <div ref="geowidgetContainer" style="height:400px; width:100%;"></div>
-                    
-                    <div v-if="selectedLocker" class="mt-4 p-3 bg-navyBlue text-white rounded shadow">
-                        <strong>Wybrany punkt:</strong> @{{ selectedLocker }}
-                    </div>
-                    <div v-else class="mt-4 p-3 bg-yellow-100 text-yellow-800 rounded">
-                        Proszę wybrać paczkomat na mapie.
-                    </div>
-                </div>
-            `,
-            props: ['method'],
-            data() {
-                return {
-                    selectedLocker: null,
-                    widgetInstance: null
-                }
-            },
-            mounted() {
-                this.initWidget();
-            },
-            methods: {
-                initWidget() {
+                initInPost() {
+                    if (this.widgetInstance) return;
+
                     const config = {
                         token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
                         language: "pl",
@@ -130,23 +122,15 @@
 
                     this.widgetInstance = new InPostGeowidget(config, (station) => {
                         this.selectedLocker = `${station.name}, ${station.address.line1}`;
-                        this.saveLockerToDatabase(station);
+                        
+                        // Zapis do bazy
+                        this.$axios.post("{{ route('inpost.save_paczkomat') }}", {
+                            paczkomat_id: station.name,
+                            paczkomat_details: this.selectedLocker
+                        });
                     });
 
-                    this.widgetInstance.render(this.$refs.geowidgetContainer);
-                },
-                saveLockerToDatabase(station) {
-                    const details = `${station.name}, ${station.address.line1}, ${station.address.line2}`;
-                    
-                    // Wywołujemy nasz kontroler, aby zapisać kod paczkomatu w tabeli addresses
-                    this.$axios.post("{{ route('inpost.save_paczkomat') }}", {
-                        paczkomat_id: station.name,
-                        paczkomat_details: details
-                    })
-                    .then(response => {
-                        console.log("Paczkomat zapisany w bazie.");
-                    })
-                    .catch(error => console.error("Błąd zapisu:", error));
+                    this.widgetInstance.render(this.$refs.inpostMap);
                 }
             }
         });
