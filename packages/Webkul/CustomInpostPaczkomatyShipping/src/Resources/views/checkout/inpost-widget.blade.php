@@ -33,7 +33,7 @@
                 method: {
                     immediate: true,
                     handler(newVal) {
-                        this.visible = newVal && newVal.includes('inpost');
+                        this.visible = newVal && newVal.includes('custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping');
                         console.log('Widget: Czy widoczny?', this.visible, 'Metoda:', newVal);
                         
                         if (this.visible) {
