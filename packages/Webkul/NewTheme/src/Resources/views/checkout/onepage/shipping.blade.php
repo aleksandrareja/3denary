@@ -4,11 +4,9 @@
     @processed="stepProcessed"
 ></v-shipping-methods>
 
-@include('paczkomaty::checkout.inpost-widget')
+@include('custom-inpost-paczkomaty-shipping::checkout.inpost-widget')
 
 @pushOnce('scripts')
-    <script>console.log('Shipping Blade: Ładowanie szablonu v-shipping-methods...');</script>
-
     <script type="text/x-template" id="v-shipping-methods-template">
         <div class="mb-7">
             <template v-if="! methods">
@@ -18,7 +16,7 @@
             <template v-else>
                 <x-shop::accordion>
                     <x-slot:header>
-                        <h2 class="text-2xl font-medium">@lang('shop::app.checkout.onepage.shipping.shipping-method')</h2>
+                        <h2 class="text-2xl font-medium">Metody wysyłki</h2>
                     </x-slot>
 
                     <x-slot:content>
@@ -51,8 +49,6 @@
     </script>
 
     <script type="module">
-        console.log('Shipping Component: Rejestracja v-shipping-methods...');
-
         app.component('v-shipping-methods', {
             template: '#v-shipping-methods-template',
             props: ['methods'],
@@ -63,22 +59,12 @@
             },
             methods: {
                 store(method) {
-                    console.log('Shipping Component: Wybrano metodę wysyłki:', method);
+                    console.log('Wybrano metodę:', method);
                     this.selectedMethod = method;
-                    
                     this.$emit('processing', 'payment');
-                    
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {
                         shipping_method: method
-                    })
-                    .then(res => {
-                        console.log('Shipping Component: Metoda zapisana na serwerze.');
-                        this.$emit('processed', 'payment');
-                    })
-                    .catch(err => {
-                        console.error('Shipping Component: Błąd zapisu metody!', err);
-                        this.$emit('processed', 'payment');
-                    });
+                    }).then(res => this.$emit('processed', 'payment'));
                 }
             }
         });
