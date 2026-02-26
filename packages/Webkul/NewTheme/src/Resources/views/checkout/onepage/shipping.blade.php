@@ -1,7 +1,5 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.before') !!}
 
-<link rel="stylesheet" href="https://sdk.inpost.pl/geowidget/v1/assets/css/geowidget.css">
-<script src="https://sdk.inpost.pl/geowidget/v1/assets/js/geowidget.js" defer></script>
 
 <v-shipping-methods
     :methods="shippingMethods"
@@ -48,6 +46,8 @@
                         </div>
                     </x-slot>
                 </x-shop::accordion>
+
+                <v-inpost-widget :method="selectedMethod" />
             </template>
         </div>
     </script>
@@ -66,28 +66,6 @@
                 };
             },
 
-            computed: {
-                // Czy wybrano metodę InPost?
-                isInPostSelected() {
-                    return this.selectedMethod && this.selectedMethod.includes('custom_inpostpaczkomaty_shipping');
-                }
-            },
-
-            watch: {
-                // Reagujemy na zmianę metody
-                selectedMethod(newVal) {
-                    if (this.isInPostSelected) {
-                        this.$nextTick(() => this.initInPost());
-                    }
-                }
-            },
-
-            mounted() {
-                if (this.isInPostSelected) {
-                    this.initInPost();
-                }
-            },
-
             methods: {
                 store(method) {
                     this.selectedMethod = method;
@@ -102,28 +80,6 @@
                         .catch(error => {
                             this.$emit('processed', 'payment');
                         });
-                },
-
-                initInPost() {
-                    if (this.widgetInstance) return;
-
-                    const config = {
-                        token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
-                        language: "pl",
-                        config: "parcelcollect"
-                    };
-
-                    this.widgetInstance = new InPostGeowidget(config, (station) => {
-                        this.selectedLocker = `${station.name}, ${station.address.line1}`;
-                        
-                        // Zapis do bazy
-                        this.$axios.post("{{ route('inpost.save_paczkomat') }}", {
-                            paczkomat_id: station.name,
-                            paczkomat_details: this.selectedLocker
-                        });
-                    });
-
-                    this.widgetInstance.render(this.$refs.inpostMap);
                 }
             }
         });
