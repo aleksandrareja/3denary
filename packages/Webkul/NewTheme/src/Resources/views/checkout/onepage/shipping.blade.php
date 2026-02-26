@@ -93,19 +93,7 @@
                 </x-shop::accordion>
 
                 <!-- InPost Widget -->
-                <div
-                    v-if="selectedMethod === 'custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping'"
-                    class="mt-6"
-                >
-                    <div id="geowidget" style="height:400px;"></div>
-
-                    <div
-                        v-if="selectedLocker"
-                        class="mt-3 p-3 bg-green-600 text-white rounded"
-                    >
-                        Wybrano: @{{ selectedLocker }}
-                    </div>
-                </div>
+                @include('custom-inpost-paczkomaty-shipping::checkout.inpost-widget')
             </template>
         </div>
     </script>
@@ -129,6 +117,7 @@
                     selectedMethod: null,
                     selectedLocker: null,
                     widgetInstance: null,
+                    inpostSelected: false,
                 };
             },
 
@@ -138,9 +127,10 @@
                 store(selectedMethod) {
 
                     this.selectedMethod = selectedMethod;
+                    this.inpostSelected = selectedMethod.includes('custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping');
 
                     this.$nextTick(() => {
-                        if (selectedMethod === "custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping") {
+                        if (this.inpostSelected) {
                             this.initGeowidget();
                         } else {
                             this.destroyGeowidget();
@@ -151,7 +141,7 @@
                 initGeowidget() {
                     if (this.widgetInstance) return;
 
-                    const container = document.getElementById('geowidget');
+                    const container = this.$refs.geowidgetContainer;
                     if (!container) return;
 
                     const config = {
