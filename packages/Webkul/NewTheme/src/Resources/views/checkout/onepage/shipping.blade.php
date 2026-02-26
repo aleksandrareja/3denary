@@ -84,9 +84,6 @@
                                             </p>
                                         </div>
                                     </label>
-
-                                    <!-- InPost Widget -->
-                                    @include('paczkomaty::checkout.inpost-widget')
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
@@ -96,6 +93,10 @@
                 </x-shop::accordion>
             </template>
 
+            <!-- InPost Widget -->
+            <div v-if="selectedMethod && selectedMethod.includes('custom_express_shipping')">
+                @include('paczkomaty::checkout.inpost-widget')
+            </div>
         </div>
     </script>
 
@@ -110,12 +111,21 @@
                     required: true,
                     default: () => null,
                 },
+
+            },
+
+            data() {
+                return {
+                    selectedMethod: null,
+                };
             },
 
             emits: ['processing', 'processed'],
 
             methods: {
                 store(selectedMethod) {
+                    this.selectedMethod = selectedMethod;
+                    
                     // Walidacja paczkomatu dla metody Inpost
                     if (selectedMethod.includes('custom_express_shipping')) {
                         const inpostInput = document.getElementById('inpost_locker_id');
