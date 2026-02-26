@@ -1,9 +1,10 @@
-<div id="inpost-map-container" v-if="selectedMethod === 'custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping'">
-    <p><strong>Wybierz Paczkomat:</strong></p>
+<div
+    v-if="isInpostSelected"
+    class="mt-6"
+>
+    <div ref="geowidgetContainer" style="height:400px;"></div>
 
-    <div id="geowidget" style="height:400px;"></div>
-
-    <div v-if="selectedLocker" class="selected-paczkomat-info">
+    <div v-if="selectedLocker" class="mt-3 p-3 bg-green-600 text-white rounded">
         Wybrano: @{{ selectedLocker }}
     </div>
 </div>
