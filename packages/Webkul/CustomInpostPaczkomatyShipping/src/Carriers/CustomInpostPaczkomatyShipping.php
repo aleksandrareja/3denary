@@ -23,6 +23,7 @@ class CustomInpostPaczkomatyShipping extends AbstractShipping
             return false;
         }
 
+
         $cart = Cart::getCart();
         
         // create shipping rate object

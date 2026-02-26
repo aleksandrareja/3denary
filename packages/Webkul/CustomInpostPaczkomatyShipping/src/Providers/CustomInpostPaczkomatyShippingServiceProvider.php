@@ -3,6 +3,7 @@
 namespace Webkul\CustomInpostPaczkomatyShipping\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class CustomInpostPaczkomatyShippingServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,17 @@ class CustomInpostPaczkomatyShippingServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // load routes
+        $this->loadRoutesFrom(dirname(__DIR__) . '/Routes/routes.php');
+
+        // load migrations
+        $this->loadMigrationsFrom(dirname(__DIR__) . '/Database/Migrations');
+
+        $this->loadViewsFrom(dirname(__DIR__) . '/Resources/views', 'paczkomaty');
        
+        Event::listen('bagisto.shop.layout.body.after', function($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('paczkomaty::checkout.inpost-widget');
+        });
     }
+
 }

@@ -54,6 +54,7 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ],
+
             [
                 'name'          => 'active',
                 'title'         => 'Enabled',
@@ -61,7 +62,45 @@ return [
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false
-            ]
+            ],
+
+            [
+                'name'    => 'api_key',
+                'title'   => 'InPost API Key',
+                'type'   => 'text',
+                'sort'   => 5,
+            ],
+
+            [
+                'name'    => 'geo_api_key',
+                'title'   => 'InPost GEO API Key',
+                'type'   => 'text',
+                'sort'   => 6,
+            ],
+
+            [
+                'name'    => 'organization_id',
+                'title'   => 'Organization ID',
+                'type'   => 'text',
+                'sort'   => 7,
+            ],
+
+            [
+                'name'    => 'environment',
+                'title'   => 'Environment',
+                'type'   => 'select',
+                'options' => [
+                    [
+                        'title' => 'Sandbox',
+                        'value' => 'sandbox',
+                    ],
+                    [
+                        'title' => 'Production',
+                        'value' => 'production',
+                    ],
+                ],
+                'sort'   => 8,
+            ],
         ]
     ]
 ];

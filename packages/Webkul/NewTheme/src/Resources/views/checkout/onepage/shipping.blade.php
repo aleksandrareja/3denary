@@ -96,6 +96,9 @@
         </div>
     </script>
 
+    <!-- InPost Widget -->
+    @include('paczkomaty::checkout.inpost-widget')
+    
     <script type="module">
         app.component('v-shipping-methods', {
             template: '#v-shipping-methods-template',
