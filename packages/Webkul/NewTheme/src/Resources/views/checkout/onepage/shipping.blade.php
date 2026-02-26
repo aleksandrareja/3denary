@@ -94,7 +94,11 @@
 
                 <!-- Inpost Widget Blade Component -->
                 <div v-if="inpostSelected" class="mt-6">
-                    @include('custom-inpost-paczkomaty-shipping::checkout.inpost-widget')
+                    <div ref="geowidgetContainer"></div>
+
+                    <div v-if="selectedLocker" class="mt-3 p-3 bg-green-600 text-white rounded">
+                        Wybrano: @{{ selectedLocker }}
+                    </div>
                 </div>
             </template>
         </div>
