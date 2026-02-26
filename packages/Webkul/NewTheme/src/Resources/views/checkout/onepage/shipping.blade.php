@@ -92,8 +92,10 @@
                     </x-slot>
                 </x-shop::accordion>
 
-                <!-- InPost Widget -->
-                @include('custom-inpost-paczkomaty-shipping::checkout.inpost-widget')
+                <!-- Inpost Widget Blade Component -->
+                <div v-if="inpostSelected" class="mt-6">
+                    @include('custom-inpost-paczkomaty-shipping::checkout.inpost-widget')
+                </div>
             </template>
         </div>
     </script>
