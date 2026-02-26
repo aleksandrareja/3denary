@@ -91,12 +91,22 @@
                         </div>
                     </x-slot>
                 </x-shop::accordion>
-            </template>
 
-            <!-- InPost Widget -->
-            <div v-if="selectedMethod && selectedMethod.includes('custom_express_shipping')">
-                @include('paczkomaty::checkout.inpost-widget')
-            </div>
+                <!-- InPost Widget -->
+                <div
+                    v-if="selectedMethod === 'custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping'"
+                    class="mt-6"
+                >
+                    <div id="geowidget" style="height:400px;"></div>
+
+                    <div
+                        v-if="selectedLocker"
+                        class="mt-3 p-3 bg-green-600 text-white rounded"
+                    >
+                        Wybrano: @{{ selectedLocker }}
+                    </div>
+                </div>
+            </template>
         </div>
     </script>
 
@@ -117,6 +127,8 @@
             data() {
                 return {
                     selectedMethod: null,
+                    selectedLocker: null,
+                    widgetInstance: null,
                 };
             },
 
@@ -124,47 +136,51 @@
 
             methods: {
                 store(selectedMethod) {
+
                     this.selectedMethod = selectedMethod;
-                    
-                    // Walidacja paczkomatu dla metody Inpost
-                    if (selectedMethod.includes('custom_express_shipping')) {
-                        const inpostInput = document.getElementById('inpost_locker_id');
-                        if (!inpostInput || !inpostInput.value || inpostInput.value.trim() === '') {
-                            const errorEl = document.getElementById('inpost-error');
-                            if (errorEl) errorEl.style.display = 'block';
-                            return;
+
+                    this.$nextTick(() => {
+                        if (selectedMethod === "custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping") {
+                            this.initGeowidget();
+                        } else {
+                            this.destroyGeowidget();
                         }
-                    }
+                    });
+                },
 
-                    this.$emit('processing', 'payment');
+                initGeowidget() {
+                    if (this.widgetInstance) return;
 
-                    const postData = {
-                        shipping_method: selectedMethod,
+                    const container = document.getElementById('geowidget');
+                    if (!container) return;
+
+                    const config = {
+                        token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
+                        language: "pl",
+                        config: "parcelcollect"
                     };
 
-                    // Dodaj dane paczkomatu jeśli zostały wybrane
-                    const inpostInput = document.getElementById('inpost_locker_id');
-                    if (inpostInput && inpostInput.value) {
-                        postData.inpost_locker_id = inpostInput.value;
+                    this.widgetInstance = new InPostGeowidget(config, (station) => {
+
+                        const details = `${station.name}, ${station.address.line1}`;
+                        this.selectedLocker = details;
+
+                        // tutaj możesz zapisać locker przez axios
+                    });
+
+                    this.widgetInstance.render(container);
+                },
+
+                destroyGeowidget() {
+                    if (this.widgetInstance) {
+                        this.widgetInstance = null;
                     }
 
-                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", postData)
-                        .then(response => {
-                            if (response.data.redirect_url) {
-                                window.location.href = response.data.redirect_url;
-                            } else {
-                                this.$emit('processed', response.data.payment_methods);
-                            }
-                        })
-                        .catch(error => {
-                            this.$emit('processing', 'shipping');
+                    const container = document.getElementById('geowidget');
+                    if (container) container.innerHTML = '';
 
-                            if (error.response.data.redirect_url) {
-                                window.location.href = error.response.data.redirect_url;
-                            }
-                        });
-                },
-            },
+                    this.selectedLocker = null;
+                }
         });
     </script>
 @endPushOnce
