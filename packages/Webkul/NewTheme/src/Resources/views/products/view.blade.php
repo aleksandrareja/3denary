@@ -203,24 +203,24 @@
                                 <div class="mt-7 mb-5 space-y-4 text-sm text-gray-600">
 
                                     <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
-                                            <span class="icon-lock text-[14px] text-goldenOrange"></span>
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
+                                            <span class="icon-lock text-xl text-goldenOrange"></span>
                                         </div>
-                                        <span>Bezpieczny zakup i szyfrowane płatności</span>
+                                        <span>Bezpieczny zakup online</span>
                                     </div>
 
                                     <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
-                                            <span class="icon-phone text-[14px] text-goldenOrange"></span>
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
+                                            <span class="icon-phone text-xl text-goldenOrange"></span>
                                         </div>
                                         <span>Możliwość zakupu telefonicznego</span>
                                     </div>
 
                                     <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
-                                            <span class="icon-truck text-[14px] text-goldenOrange"></span>
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
+                                            <span class="icon-truck text-xl text-goldenOrange"></span>
                                         </div>
-                                        <span>Ubezpieczona i bezpieczna wysyłka</span>
+                                        <span>Ubezpieczona wysyłka</span>
                                     </div>
 
                                 </div>
