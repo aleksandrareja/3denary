@@ -200,25 +200,27 @@
                                 @include('shop::products.view.types.booking')
 
                                 <!-- Trust Badges -->
-                                <div class="mt-6 mb-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] text-gray-600">
+                                <div class="mt-7 mb-5 space-y-4 text-sm text-gray-600">
 
-                                    <div class="flex items-center gap-2">
-                                        <span class="icon-lock text-[16px] text-goldenOrange"></span>
-                                        <span>Bezpieczny zakup</span>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
+                                            <span class="icon-lock text-[14px] text-goldenOrange"></span>
+                                        </div>
+                                        <span>Bezpieczny zakup i szyfrowane płatności</span>
                                     </div>
 
-                                    <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
-
-                                    <div class="flex items-center gap-2">
-                                        <span class="icon-phone text-[16px] text-goldenOrange"></span>
-                                        <span>Zakup telefoniczny</span>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
+                                            <span class="icon-phone text-[14px] text-goldenOrange"></span>
+                                        </div>
+                                        <span>Możliwość zakupu telefonicznego</span>
                                     </div>
 
-                                    <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
-
-                                    <div class="flex items-center gap-2">
-                                        <span class="icon-truck text-[16px] text-goldenOrange"></span>
-                                        <span>Ubezpieczona wysyłka</span>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-7 h-7 flex items-center justify-center rounded-full bg-goldenOrange/10">
+                                            <span class="icon-truck text-[14px] text-goldenOrange"></span>
+                                        </div>
+                                        <span>Ubezpieczona i bezpieczna wysyłka</span>
                                     </div>
 
                                 </div>
