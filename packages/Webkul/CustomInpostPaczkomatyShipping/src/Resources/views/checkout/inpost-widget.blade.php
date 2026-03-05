@@ -1,23 +1,21 @@
 @pushOnce('scripts')
 
 <link rel="stylesheet"
-href="//geowidget.inpost.pl/v1/assets/css/geowidget.css">
-
-<script
-src="//geowidget.inpost.pl/v1/assets/js/geowidget.js"
-defer
-onload="window.inpostSdkLoaded = true"
-></script>
+      href="https://sdk.inpost.pl/geowidget/v5/assets/css/geowidget.css"
+      crossorigin="anonymous">
+<script src="https://sdk.inpost.pl/geowidget/v5/assets/js/geowidget.js"
+        defer
+        crossorigin="anonymous"></script>
 
 <script type="text/x-template" id="v-inpost-widget-template">
 
-<div v-if="visible" class="mt-6 p-4 border rounded-xl bg-white">
+<div v-show="visible" class="mt-6 p-4 border rounded">
 
-    <h3 class="mb-4 font-bold text-lg">
+    <h3 class="font-bold text-lg mb-3">
         Wybierz paczkomat
     </h3>
 
-    <div ref="map" style="width:100%; height:450px;"></div>
+    <div id="inpost-map" ref="mapContainer" style="height: 450px;"></div>
 
     <div v-if="selectedLocker" class="mt-4 p-3 bg-green-600 text-white rounded">
         Wybrano: @{{ selectedLocker }}
@@ -28,7 +26,6 @@ onload="window.inpostSdkLoaded = true"
 </script>
 
 <script type="module">
-
 app.component('v-inpost-widget', {
 
     template: '#v-inpost-widget-template',
@@ -37,76 +34,79 @@ app.component('v-inpost-widget', {
         return {
             visible: false,
             widgetInstance: null,
-            selectedLocker: null
-        }
+            selectedLocker: null,
+        };
     },
 
     mounted() {
+        document.body.addEventListener('change', this.onShippingMethodChange);
+    },
 
-        document.addEventListener('change', (e) => {
-
-            if (e.target.name !== 'shipping_method') return;
-
-            const method = e.target.value;
-
-            this.visible = method === 'custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping';
-
-            if (this.visible) {
-                this.$nextTick(() => {
-                    setTimeout(() => this.initWidget(), 200);
-                });
-            }
-
-        });
-
+    beforeUnmount() {
+        document.body.removeEventListener('change', this.onShippingMethodChange);
     },
 
     methods: {
 
-        initWidget() {
+        onShippingMethodChange(e) {
+            if (e.target.name !== "shipping_method") return;
 
-            if(!window.InpostGeowidget) {
-                console.error('InPost Geowidget SDK not loaded');
+            const method = e.target.value;
+
+            // TYLKO dla paczkomatów
+            this.visible = method.includes('custom_inpostpaczkomaty_shipping');
+
+            if (this.visible) {
+                this.loadGeowidget();
+            } else {
+                this.resetWidget();
+            }
+        },
+
+        loadGeowidget() {
+            if (!window.InPostGeowidget) {
+                console.error("SDK InPostGeowidget not loaded.");
                 return;
             }
 
             if (this.widgetInstance) return;
 
-            const config = {
+            const TOKEN = "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}";
+            if (!TOKEN) {
+                console.error("Brak geowidget tokena!");
+                return;
+            }
 
-                token: "{{ core()->getConfigData('sales.carriers.custom_inpostpaczkomaty_shipping.geo_api_key') }}",
-
+            this.widgetInstance = new window.InPostGeowidget({
+                token: TOKEN,
                 language: "pl",
-
                 config: "parcelcollect"
-
-            };
-
-            this.widgetInstance = new InPostGeowidget(config, (station) => {
+            },
+            (station) => {
 
                 this.selectedLocker = station.name + ", " + station.address.line1;
 
                 this.$axios.post("{{ route('inpost.save_locker') }}", {
-
                     paczkomat_id: station.name,
-
                     paczkomat_details: this.selectedLocker
-
                 });
 
             });
 
-            this.widgetInstance.render(this.$refs.map);
+            this.widgetInstance.render(this.$refs.mapContainer);
+        },
 
+        resetWidget() {
+            this.selectedLocker = null;
+            this.widgetInstance = null;
+            if (this.$refs.mapContainer) {
+                this.$refs.mapContainer.innerHTML = "";
+            }
         }
 
     }
 
 });
-
 </script>
 
 @endPushOnce
-
-
-<v-inpost-widget></v-inpost-widget>
