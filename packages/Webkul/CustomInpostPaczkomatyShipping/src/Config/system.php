@@ -69,6 +69,8 @@ return [
                 'title'   => 'InPost API Key',
                 'type'   => 'text',
                 'sort'   => 5,
+                'channel_based' => true,
+                'locale_based'  => false
             ],
 
             [
@@ -76,6 +78,8 @@ return [
                 'title'   => 'InPost GEO API Key',
                 'type'   => 'text',
                 'sort'   => 6,
+                'channel_based' => true,
+                'locale_based'  => false
             ],
 
             [
@@ -83,6 +87,8 @@ return [
                 'title'   => 'Organization ID',
                 'type'   => 'text',
                 'sort'   => 7,
+                'channel_based' => true,
+                'locale_based'  => false
             ],
 
             [
@@ -100,6 +106,8 @@ return [
                     ],
                 ],
                 'sort'   => 8,
+                'channel_based' => true,
+                'locale_based'  => false
             ],
         ]
     ]

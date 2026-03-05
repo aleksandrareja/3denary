@@ -58,12 +58,23 @@
                                         :for="rate.method"
                                     >
                                     </label>
+                                    
 
                                     <label 
                                         class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
-                                        <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                        <template v-if="rate.image">
+                                            <img
+                                                :src="rate.image"
+                                                :alt="rate.method_title"
+                                                class="max-h-20 max-w-[120px] object-contain mb-2"
+                                            />
+                                        </template>
+
+                                        <template v-else>
+                                            <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                        </template>
 
                                         <div>
                                             <p class="mt-1.5 text-2xl font-semibold max-md:text-base">
