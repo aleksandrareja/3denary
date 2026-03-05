@@ -199,28 +199,42 @@
 
                                 @include('shop::products.view.types.booking')
 
-                                <!-- Trust Badges -->
-                                <div class="mt-7 mb-5 space-y-4 text-sm text-gray-600">
-
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
-                                            <span class="icon-lock text-xl text-goldenOrange"></span>
+                               <div class="mt-8 mb-8 space-y-6">
+                                    <div class="flex items-start gap-4 group">
+                                        <div class="w-11 h-11 flex-shrink-0 rounded-full bg-stone-50 flex items-center justify-center transition-colors duration-300 group-hover:bg-stone-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#a38655" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                            </svg>
                                         </div>
-                                        <span>Bezpieczny zakup online</span>
+                                        <div class="flex flex-col">
+                                            <p class="text-[11px] uppercase tracking-[2px] font-semibold text-stone-500">Bezpieczny zakup</p>
+                                            <p class="text-[13px] text-stone-400 font-light leading-snug mt-0.5">Gwarancja autentyczności i bezpieczne płatności online.</p>
+                                        </div>
                                     </div>
 
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
-                                            <span class="icon-phone text-xl text-goldenOrange"></span>
+                                    <div class="flex items-start gap-4 group">
+                                        <div class="w-11 h-11 flex-shrink-0 rounded-full bg-stone-50 flex items-center justify-center transition-colors duration-300 group-hover:bg-stone-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#a38655" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                                            </svg>
                                         </div>
-                                        <span>Możliwość zakupu telefonicznego</span>
+                                        <div class="flex flex-col">
+                                            <p class="text-[11px] uppercase tracking-[2px] font-semibold text-stone-500">Zakup telefoniczny</p>
+                                            <p class="text-[13px] text-stone-400 font-light leading-snug mt-0.5">Doradztwo numizmatyczne i zamówienia przez telefon.</p>
+                                        </div>
                                     </div>
 
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-7 h-7 flex items-center justify-center rounded-lg bg-transparentOrange">
-                                            <span class="icon-truck text-xl text-goldenOrange"></span>
+                                    <div class="flex items-start gap-4 group">
+                                        <div class="w-11 h-11 flex-shrink-0 rounded-full bg-stone-50 flex items-center justify-center transition-colors duration-300 group-hover:bg-stone-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#a38655" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-5.25v9" />
+                                                <circle cx="12" cy="12" r="3" fill="#a38655" fill-opacity="0.1" />
+                                            </svg>
                                         </div>
-                                        <span>Ubezpieczona wysyłka</span>
+                                        <div class="flex flex-col">
+                                            <p class="text-[11px] uppercase tracking-[2px] font-semibold text-stone-500">Ubezpieczona wysyłka</p>
+                                            <p class="text-[13px] text-stone-400 font-light leading-snug mt-0.5">Paczki ubezpieczone na pełną wartość przedmiotu.</p>
+                                        </div>
                                     </div>
 
                                 </div>
