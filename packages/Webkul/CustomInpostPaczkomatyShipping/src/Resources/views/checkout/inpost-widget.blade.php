@@ -98,3 +98,4 @@ app.component('v-inpost-widget', {
 @endPushOnce
 
 
+<v-inpost-widget></v-inpost-widget>
