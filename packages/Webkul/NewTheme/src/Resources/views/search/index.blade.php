@@ -27,25 +27,6 @@
             @include('shop::search.images.results')
         @endif
 
-        <div class="flex justify-between items-end border-b border-lightGray pb-4 mt-10">
-
-        <!-- Title -->
-        <div class="text-4xl text-gray-700">
-            Wyniki wyszukiwania
-        </div>
-
-        <!-- Desktop toolbar -->
-        <div class="max-md:hidden">
-            <v-toolbar @filter-applied="setFilters('toolbar', $event)"></v-toolbar>
-        </div>
-
-        <!-- Mobile filter + sort icons -->
-        <div class="md:hidden">
-            @include('shop::categories.filters')
-        </div>
-
-    </div>
-
         @if ($searchInstead)
             <form
                 action="{{ route('shop.search.index', ['suggest' => false]) }}"
@@ -91,13 +72,39 @@
             type="text/x-template"
             id="v-search-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
-                <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-10">
+            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
+                <!-- CATEGORY HEADER -->
+                <div class="flex justify-between items-end border-b border-lightGray pb-4 mt-10">
+
+                    <!-- Description -->
+                    <div class="text-4xl text-gray-700">
+                        Wyniki wyszukiwania:
+                    </div>
+
+                    <!-- Desktop toolbar -->
+                    <div class="max-md:hidden">
+                        <v-toolbar @filter-applied="setFilters('toolbar', $event)"></v-toolbar>
+                    </div>
+
+                    <!-- Mobile filter + sort icons -->
+                    <div class="md:hidden">
+                        @include('shop::categories.filters')
+                    </div>
+
+                </div>
+
+                <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-10 max-md:flex-col">
                     <!-- Product Listing Filters -->
-                    @include('shop::categories.filters')
+                     <div class="max-md:hidden w-[280px] max-md:w-full mt-8">
+                        @include('shop::categories.filters')
+                    </div>
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
+                        <!-- Desktop Product Listing Toolbar -->
+                        <div class="max-md:hidden">
+                            @include('shop::categories.toolbar')
+                        </div>
 
                         <!-- Product List Card Container -->
                         <div
