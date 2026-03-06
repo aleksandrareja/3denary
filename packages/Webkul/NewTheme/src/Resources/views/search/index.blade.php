@@ -27,11 +27,24 @@
             @include('shop::search.images.results')
         @endif
 
-        <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h2 class="text-2xl font-medium max-sm:text-base">
-                <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
-            </h2>
+        <div class="flex justify-between items-end border-b border-lightGray pb-4 mt-10">
+
+        <!-- Title -->
+        <div class="text-4xl text-gray-700">
+            Wyniki wyszukiwania
         </div>
+
+        <!-- Desktop toolbar -->
+        <div class="max-md:hidden">
+            <v-toolbar @filter-applied="setFilters('toolbar', $event)"></v-toolbar>
+        </div>
+
+        <!-- Mobile filter + sort icons -->
+        <div class="md:hidden">
+            @include('shop::categories.filters')
+        </div>
+
+    </div>
 
         @if ($searchInstead)
             <form
@@ -85,10 +98,6 @@
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
-                        <!-- Desktop Product Listing Toolbar -->
-                        <div class="max-md:hidden">
-                            @include('shop::categories.toolbar')
-                        </div>
 
                         <!-- Product List Card Container -->
                         <div
