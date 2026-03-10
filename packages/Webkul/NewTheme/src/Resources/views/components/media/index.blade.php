@@ -19,7 +19,7 @@
         id="v-media-template"
     >
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
-            <div :class="{'border border-dashed border-gray-300 rounded-2xl': isDragOver }">
+            <div :class="{'border border-dashed border-gray-300 rounded-lg': isDragOver }">
                 <div
                     class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
                     v-if="uploadedFiles.isPicked"

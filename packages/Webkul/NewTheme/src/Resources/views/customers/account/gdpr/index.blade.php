@@ -221,7 +221,7 @@
             <x-slot:footer>
                 <div class="flex flex-wrap items-center gap-4">
                     <x-shop::button
-                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:rounded-lg max-md:py-1.5"
+                        class="primary-button max-w-none flex-auto rounded-lg px-11 py-3 max-md:rounded-lg max-md:py-1.5"
                         :title="trans('shop::app.customers.account.gdpr.index.modal.save')"
                         ::loading="isStoring"
                         ::disabled="isStoring"

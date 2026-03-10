@@ -57,5 +57,5 @@
     </div>
 
     <!-- Proceed to checkout button -->
-    <div class="shimmer h-[46px] w-2/4 rounded-2xl max-sm:mb-10 max-sm:hidden"></div>
+    <div class="shimmer h-[46px] w-2/4 rounded-lg max-sm:mb-10 max-sm:hidden"></div>
 </div>

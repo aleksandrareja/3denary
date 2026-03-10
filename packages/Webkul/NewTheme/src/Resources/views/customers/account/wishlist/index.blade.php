@@ -223,7 +223,7 @@
                                         @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                                             <!--Wishlist Item Move-to-cart-->
                                             <x-shop::button
-                                                class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-md:px-4 max-md:py-1.5 max-md:text-sm"
+                                                class="primary-button max-h-10 w-max rounded-lg px-6 py-1.5 text-center text-base max-md:px-4 max-md:py-1.5 max-md:text-sm"
                                                 :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
                                                 ::loading="movingToCart"
                                                 ::disabled="movingToCart"

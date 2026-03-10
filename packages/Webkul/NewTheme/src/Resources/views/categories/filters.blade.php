@@ -209,7 +209,7 @@
                                     <input
                                         type="checkbox"
                                         :id="`filter_${filter.id}_option_${option.id}`"
-                                        class="peer absolute opacity-0 pointer-events-none"
+                                        class="peer absolute opacity-0"
                                         :value="option.id"
                                         v-model="appliedValues"
                                         @change="applyValue"

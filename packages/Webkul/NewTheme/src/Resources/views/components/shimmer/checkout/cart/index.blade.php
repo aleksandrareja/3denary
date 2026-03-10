@@ -54,9 +54,9 @@
 
         <!-- Continue And Update Button -->
         <div class="flex flex-wrap justify-end gap-8 max-sm:justify-between max-sm:gap-5">
-            <div class="shimmer h-14 w-[217px] rounded-2xl max-sm:h-[46px]"></div>
+            <div class="shimmer h-14 w-[217px] rounded-lg max-sm:h-[46px]"></div>
 
-            <div class="shimmer h-14 w-[161px] rounded-2xl max-sm:h-[46px]"></div>
+            <div class="shimmer h-14 w-[161px] rounded-lg max-sm:h-[46px]"></div>
         </div>
     </div>
 
@@ -92,7 +92,7 @@
                 
                 <p class="shimmer h-6 w-[38%]"></p>
             </div>
-            <div class="shimmer mt-4 block h-[46px] w-3/5 place-self-end rounded-2xl"></div>
+            <div class="shimmer mt-4 block h-[46px] w-3/5 place-self-end rounded-lg"></div>
         </div>
     </div>
 </div>

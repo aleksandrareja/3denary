@@ -41,6 +41,6 @@
 
     <!-- Confirm Button -->
     <div class="mt-4 flex justify-end">
-        <div class="shimmer h-14 w-40 rounded-2xl"></div>
+        <div class="shimmer h-14 w-40 rounded-lg"></div>
     </div>
 </div>

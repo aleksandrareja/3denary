@@ -17,7 +17,7 @@
             </div>
 
             <div class="relative mx-auto flex h-20 w-full items-center justify-center p-2">
-                <div class="relative h-1 w-full rounded-2xl bg-gray-200">
+                <div class="relative h-1 w-full rounded-lg bg-gray-200">
                     <div
                         ref="progress"
                         class="absolute left-1/4 right-0 h-full rounded-xl bg-navyBlue"
