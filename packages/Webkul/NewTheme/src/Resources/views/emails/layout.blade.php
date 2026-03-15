@@ -22,11 +22,11 @@
         />
     </head>
 
-    <body style="font-family: inter;">
+    <body>
         <div style="max-width: 640px; margin-left: auto; margin-right: auto;">
             <div style="padding: 30px;">
                 <!-- Email Header -->
-                <div style="margin-bottom: 65px; margin-left: auto; margin-right: auto; text-align: center;">
+                <div style="margin-bottom: 30px; margin-left: auto; margin-right: auto; text-align: center;">
                     <a href="{{ route('shop.home.index') }}">
                         <img
                             src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
@@ -40,7 +40,7 @@
                 {{ $slot }}
 
                 <!-- Email Footer -->
-                <p style="font-size: 16px;color: #202B3C;line-height: 24px;">
+                <p style="font-size: 14px;color: #202B3C;line-height: 24px; text-align: center;">
                     @lang('shop::app.emails.thanks', [
                         'link' => 'mailto:' . core()->getContactEmailDetails()['email'],
                         'email' => core()->getContactEmailDetails()['email'],
