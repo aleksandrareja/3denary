@@ -1,34 +1,36 @@
 @component('shop::emails.layout')
-    <div style="max-width: 600px; margin: 40px auto; font-family: 'Helvetica', Arial, sans-serif; background-color: #fff8f0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 40px;">
-        
-        <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="font-size: 28px; color: #121A26; margin: 0; font-weight: 700;">
-                @lang('shop::app.emails.dear', ['customer_name' => $customer->name]) 👋
-            </h1>
-            <p style="font-size: 16px; color: #384860; margin-top: 8px;">
-                @lang('shop::app.emails.customers.verification.greeting')
-            </p>
-        </div>
 
-        <div style="font-size: 16px; color: #384860; line-height: 1.6; margin-bottom: 40px;">
-            <p>
-                @lang('shop::app.emails.customers.verification.description')
-            </p>
-        </div>
+<div style="background:#ffffff;border-radius:8px;padding:35px 30px;border:1px solid #f0f0f0;">
 
-        <div style="text-align: center; margin-bottom: 30px;">
-            <a
-                href="{{ route('shop.customers.verify', $customer->token) }}"
-                style="display: inline-block; padding: 16px 50px; font-size: 16px; font-weight: 700; color: #ffffff; background-color: #38200F; text-decoration: none; border-radius: 8px; text-transform: uppercase; transition: background 0.3s;"
-                onmouseover="this.style.backgroundColor='#52321a'"
-                onmouseout="this.style.backgroundColor='#38200F'"
-            >
-                @lang('shop::app.emails.customers.verification.verify-email')
-            </a>
-        </div>
+    <p style="font-weight:600;font-size:22px;color:#121A26;line-height:28px;margin-bottom:20px;">
+        @lang('shop::app.emails.dear', ['customer_name' => $customer->name]), 👋
+    </p>
 
-        <div style="font-size: 14px; color: #9ca3af; text-align: center;">
-            <p style="margin: 0;">@lang('shop::app.emails.customers.verification.footer')</p>
-        </div>
+    <p style="font-size:16px;color:#384860;line-height:26px;margin-bottom:18px;">
+        @lang('shop::app.emails.customers.verification.greeting')
+    </p>
+
+    <p style="font-size:16px;color:#384860;line-height:26px;margin-bottom:35px;">
+        @lang('shop::app.emails.customers.verification.description')
+    </p>
+
+    <div style="text-align:center;margin:35px 0;">
+        <a
+            href="{{ route('shop.customers.verify', $customer->token) }}"
+            style="background:#38200F;color:#ffffff;padding:16px 40px;
+                   text-decoration:none;font-weight:600;font-size:14px;
+                   letter-spacing:0.5px;border-radius:6px;display:inline-block;
+                   text-transform:uppercase;">
+            @lang('shop::app.emails.customers.verification.verify-email')
+        </a>
     </div>
+
+    <hr style="border:none;border-top:1px solid #eeeeee;margin:30px 0;">
+
+    <p style="font-size:14px;color:#6b7280;line-height:22px;margin:0;">
+        Jeśli nie tworzyłeś konta w naszym sklepie, możesz bezpiecznie zignorować tę wiadomość.
+    </p>
+
+</div>
+
 @endcomponent

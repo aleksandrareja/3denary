@@ -26,12 +26,12 @@
         <div style="max-width: 640px; margin-left: auto; margin-right: auto;">
             <div style="padding: 30px;">
                 <!-- Email Header -->
-                <div style="margin-bottom: 65px;">
+                <div style="margin-bottom: 65px; margin-left: auto; margin-right: auto; text-align: center;">
                     <a href="{{ route('shop.home.index') }}">
                         <img
                             src="{{ asset('storage/'. core()->getCurrentChannel()->logo) }}"
                             alt="{{ config('app.name') }}"
-                            style="height: 40px; width: 110px;"
+                            style="width: 170px; height: auto;"
                         />
                     </a>
                 </div>
