@@ -28,9 +28,9 @@ class CustomInpostPaczkomatyShipping extends AbstractShipping
         
         // create shipping rate object
         $object = new CartShippingRate;
-        $object->carrier = 'custom_inpostpaczkomaty_shipping';
+        $object->carrier = $this->code;
         $object->carrier_title = $this->getConfigData('title');
-        $object->method = 'custom_inpostpaczkomaty_shipping_custom_inpostpaczkomaty_shipping';
+        $object->method = 'paczkomaty_shipping';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
         
