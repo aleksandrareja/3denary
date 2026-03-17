@@ -84,6 +84,7 @@
                                             <p class="mt-2.5 text-xs font-medium max-md:mt-1 max-sm:mt-0 max-sm:font-normal max-sm:text-zinc-500">
                                                 <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                             </p>
+                                            @{{ rate.method }}
                                         </div>
                                     </label>
                                 </div>
