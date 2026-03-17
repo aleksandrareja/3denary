@@ -76,6 +76,9 @@ class InpostShippingServiceProvider extends EventServiceProvider
         Event::listen(
             'bagisto.shop.checkout.onepage.shipping_methods.after',
             function ($viewRenderEventManager) {
+                static $rendered = false;
+                if ($rendered) return;
+                $rendered = true;
                 $viewRenderEventManager->addTemplate('inpost::shop.checkout.geowidget');
             }
         );

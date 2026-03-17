@@ -34,7 +34,7 @@
     class="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
 >
     <p class="mb-3 font-semibold text-gray-800">
-        {{ __('inpost::app.geowidget.select-locker') }}
+       Wybierz paczkomat
     </p>
 
     {{-- Wybrany paczkomat --}}
@@ -51,7 +51,7 @@
             type="button"
             onclick="inpostOpenWidget()"
             class="shrink-0 text-sm text-blue-600 underline hover:text-blue-800"
-        >{{ __('inpost::app.geowidget.change') }}</button>
+        >Otwórz mapę</button>
     </div>
 
     {{-- Przycisk wyboru paczkomatu --}}
@@ -61,12 +61,12 @@
         onclick="inpostOpenWidget()"
         class="{{ $savedPointId ? 'hidden' : '' }} inline-flex items-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 font-semibold text-black hover:bg-yellow-500"
     >
-        📦 {{ __('inpost::app.geowidget.choose-locker') }}
+        📦 Wybierz paczkomat
     </button>
 
     {{-- Komunikat walidacji --}}
     <p id="inpost-validation-msg" class="mt-2 hidden text-sm text-red-600">
-        {{ __('inpost::app.geowidget.validation-required') }}
+        Proszę wybrać paczkomat
     </p>
 </div>
 
@@ -80,7 +80,7 @@
     <div class="flex h-[90vh] w-full max-w-5xl flex-col rounded-xl bg-white shadow-2xl">
         <div class="flex items-center justify-between border-b px-5 py-3">
             <span class="text-lg font-bold text-gray-900">
-                📦 {{ __('inpost::app.geowidget.modal-title') }}
+                📦 Wybierz paczkomat
             </span>
             <button
                 type="button"
