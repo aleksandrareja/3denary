@@ -123,14 +123,14 @@
 
             emits: ['processing', 'processed'],
 
+            data() {
+                return {
+                    selectedMethod: null,
+                    selectedLocker: null
+                }
+            },
+            
             methods: {
-                data() {
-                    return {
-                        selectedMethod: null,
-                        selectedLocker: null,
-                    }
-                },
-
                 store(selectedMethod) {
                     this.selectedMethod = selectedMethod;
 
