@@ -72,25 +72,14 @@ class InpostShippingServiceProvider extends EventServiceProvider
 
         // ── View Render Events ────────────────────────────────────────────────
         // Inject the GeoWidget below the shipping method list on the checkout page.
-        //
-        // Bagisto's default shop checkout fires this event in:
-        //   packages/Webkul/Shop/src/Resources/views/checkout/onepage/index.blade.php
-        //
-        // If your theme uses a different event name, swap it below.
+   
         Event::listen(
-            'bagisto.shop.checkout.shipping.after',
+            'bagisto.shop.checkout.shipping_methods.after',
             function ($viewRenderEventManager) {
                 $viewRenderEventManager->addTemplate('inpost::shop.checkout.geowidget');
             }
         );
 
-        // Fallback event fired on the full checkout page (Vue-based default theme)
-        Event::listen(
-            'bagisto.shop.checkout.onepage.index.after',
-            function ($viewRenderEventManager) {
-                $viewRenderEventManager->addTemplate('inpost::shop.checkout.geowidget');
-            }
-        );
 
         // Inject InPost locker info into the admin order detail view
         Event::listen(
