@@ -138,4 +138,106 @@
     </script>
 @endPushOnce
 
-{!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
+@php
+    $geowidgetToken = core()->getConfigData('sales.carriers.inpost.geowidget_token') ?? '';
+    $environment    = core()->getConfigData('sales.carriers.inpost.environment') ?? 'sandbox';
+    $widgetBaseUrl  = $environment === 'production'
+        ? 'https://geowidget.inpost.pl'
+        : 'https://sandbox-geowidget.inpost.pl';
+@endphp
+
+<link rel="stylesheet" href="{{ $widgetBaseUrl }}/inpost-geowidget.css">
+<script defer src="{{ $widgetBaseUrl }}/inpost-geowidget.js"></script>
+
+<div id="inpost-widget-wrapper" style="display:none" class="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+    <p class="mb-3 font-semibold text-gray-800">Wybierz paczkomat InPost</p>
+    <div id="inpost-selected-info" class="hidden mb-3 flex items-start gap-3 rounded-md border border-green-300 bg-green-50 p-3">
+        <span class="mt-0.5 text-2xl">📦</span>
+        <div class="flex-1">
+            <p class="font-semibold text-green-800" id="inpost-point-name"></p>
+            <p class="text-sm text-green-700" id="inpost-point-address"></p>
+        </div>
+        <button type="button" onclick="inpostOpenWidget()" class="shrink-0 text-sm text-blue-600 underline hover:text-blue-800">Zmień paczkomat</button>
+    </div>
+    <button type="button" id="inpost-open-btn" onclick="inpostOpenWidget()" class="inline-flex items-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 font-semibold text-black hover:bg-yellow-500">
+        📦 Wybierz paczkomat
+    </button>
+    <p id="inpost-validation-msg" class="mt-2 hidden text-sm text-red-600">Proszę wybrać paczkomat przed kontynuowaniem</p>
+</div>
+
+<div id="inpost-modal" style="display:none" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4">
+    <div class="flex h-[90vh] w-full max-w-5xl flex-col rounded-xl bg-white shadow-2xl">
+        <div class="flex items-center justify-between border-b px-5 py-3">
+            <span class="text-lg font-bold text-gray-900">📦 Wybierz paczkomat InPost</span>
+            <button type="button" onclick="inpostCloseWidget()" class="text-3xl leading-none text-gray-500 hover:text-gray-800">X</button>
+        </div>
+        <div class="flex-1 overflow-hidden" id="inpost-geowidget-container"></div>
+    </div>
+</div>
+
+@push('scripts')
+<script type="module">
+(function () {
+    var TOKEN = '{{ $geowidgetToken }}';
+    var METHOD = 'inpost_inpost';
+
+    window.inpostOpenWidget = function () {
+        document.getElementById('inpost-modal').style.display = 'flex';
+        var c = document.getElementById('inpost-geowidget-container');
+        if (c && !c.hasChildNodes()) {
+            var w = document.createElement('inpost-geowidget');
+            w.setAttribute('token', TOKEN);
+            w.setAttribute('language', 'pl');
+            w.setAttribute('config', 'parcelcollect');
+            w.setAttribute('onpoint', 'window.onInpostPointSelected');
+            w.style.cssText = 'width:100%;height:100%;display:block;';
+            c.appendChild(w);
+        }
+    };
+
+    window.inpostCloseWidget = function () {
+        document.getElementById('inpost-modal').style.display = 'none';
+    };
+
+    window.onInpostPointSelected = function (point) {
+        inpostCloseWidget();
+        var pointId = point.name;
+        var addr = point.address_details || {};
+        var pointAddress = addr.street
+            ? (addr.street + ' ' + (addr.building_number || '') + ', ' + (addr.post_code || '') + ' ' + (addr.city || '')).trim()
+            : ((point.address && point.address.line1) || '');
+
+        document.getElementById('inpost-point-name').textContent = pointId;
+        document.getElementById('inpost-point-address').textContent = pointAddress;
+        document.getElementById('inpost-selected-info').classList.remove('hidden');
+        document.getElementById('inpost-open-btn').classList.add('hidden');
+        document.getElementById('inpost-validation-msg').classList.add('hidden');
+
+        fetch('{{ route('inpost.save-point') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') || {}).content || '{{ csrf_token() }}',
+            },
+            body: JSON.stringify({ point_id: pointId, point_name: pointId, point_address: pointAddress }),
+        }).then(function(r) { return r.json(); }).catch(function(e) { console.error(e); });
+    };
+
+    document.addEventListener('change', function (e) {
+        if (!e.target || e.target.name !== 'shipping_method') return;
+        document.getElementById('inpost-widget-wrapper').style.display =
+            e.target.value === METHOD ? 'block' : 'none';
+    });
+
+    function checkInitial() {
+        var r = document.querySelector('input[name="shipping_method"]:checked');
+        if (r && r.value === METHOD) document.getElementById('inpost-widget-wrapper').style.display = 'block';
+    }
+
+    var obs = new MutationObserver(checkInitial);
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function() { obs.disconnect(); }, 15000);
+    checkInitial();
+})();
+</script>
+@endpush
