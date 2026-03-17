@@ -46,5 +46,6 @@ return [
     Webkul\NewTheme\Providers\NewThemeServiceProvider::class,
     Webkul\CustomPrzelewy24Payment\Providers\CustomPrzelewy24PaymentServiceProvider::class,
     Webkul\CustomInpostPaczkomatyShipping\Providers\CustomInpostPaczkomatyShippingServiceProvider::class,
+    Webkul\InpostShipping\Providers\InpostShippingServiceProvider::class,
 ];
   

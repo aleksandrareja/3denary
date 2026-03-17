@@ -1,0 +1,23 @@
+{
+    "name": "webkul/inpost-shipping",
+    "description": "InPost Paczkomat shipping method for Bagisto with GeoWidget support",
+    "type": "library",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\InpostShipping\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\InpostShipping\\Providers\\InpostShippingServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
