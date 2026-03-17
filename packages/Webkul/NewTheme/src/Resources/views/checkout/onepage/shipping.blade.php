@@ -84,9 +84,20 @@
                                             <p class="mt-2.5 text-xs font-medium max-md:mt-1 max-sm:mt-0 max-sm:font-normal max-sm:text-zinc-500">
                                                 <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                             </p>
-                                            @{{ rate.method }}
                                         </div>
                                     </label>
+                                    <div v-if="selectedMethod === 'paczkomaty_shipping'" class="mt-4">
+                                        <button 
+                                            class="px-4 py-2 bg-blue-600 text-white rounded"
+                                            @click="openInpostWidget"
+                                        >
+                                            Wybierz paczkomat
+                                        </button>
+
+                                        <div v-if="selectedLocker" class="mt-2 text-sm">
+                                            Wybrany paczkomat: <b>@{{ selectedLocker }}</b>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
@@ -113,7 +124,21 @@
             emits: ['processing', 'processed'],
 
             methods: {
+                data() {
+                    return {
+                        selectedMethod: null,
+                        selectedLocker: null,
+                    }
+                },
+
                 store(selectedMethod) {
+                    this.selectedMethod = selectedMethod;
+
+                    if(selectedMethod === 'paczkomaty_shipping' && !this.selectedLocker) {
+                        alert('Proszę wybrać paczkomat przed kontynuacją.');
+                        return;
+                    }
+
                     this.$emit('processing', 'payment');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
@@ -134,10 +159,29 @@
                             }
                         });
                 },
+                
+                openInpostWidget() {
+                    easyPack.init({
+                        defaultLocale: 'pl'
+                    });
+
+                    easyPack.openMap({
+                        config: 'parcelCollect',
+                        onpointselected: (point) => {
+                            this.selectedLocker = point.name;
+
+                            // zapis do backendu
+                            this.$axios.post('/inpost/save-locker', {
+                                locker: point.name
+                            });
+                        }
+                    });
+                }
             },
         });
     </script>
 @endPushOnce
 
+<script src="https://geowidget.easypack24.net/js/sdk-for-javascript.js"></script>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
