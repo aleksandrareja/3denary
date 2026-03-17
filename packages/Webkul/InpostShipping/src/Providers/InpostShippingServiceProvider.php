@@ -74,7 +74,7 @@ class InpostShippingServiceProvider extends EventServiceProvider
         // Inject the GeoWidget below the shipping method list on the checkout page.
    
         Event::listen(
-            'bagisto.shop.checkout.shipping_methods.after',
+            'bagisto.shop.checkout.onepage.shipping_methods.after',
             function ($viewRenderEventManager) {
                 $viewRenderEventManager->addTemplate('inpost::shop.checkout.geowidget');
             }
