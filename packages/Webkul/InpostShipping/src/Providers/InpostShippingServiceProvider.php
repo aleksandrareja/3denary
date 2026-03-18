@@ -69,7 +69,12 @@ class InpostShippingServiceProvider extends EventServiceProvider
             dirname(__DIR__) . '/Resources/lang',
             'inpost'
         );
-        
+
+        $this->publishes([
+            dirname(__DIR__) . '/Resources/assets/js/geowidget.js'
+                => public_path('vendor/inpost/geowidget.js'),
+        ], 'inpost-assets');
+
         // ── View Render Events ────────────────────────────────────────────────
         // Inject the GeoWidget below the shipping method list on the checkout page.
    
