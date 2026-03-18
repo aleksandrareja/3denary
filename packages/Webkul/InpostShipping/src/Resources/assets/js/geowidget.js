@@ -1,48 +1,45 @@
 (function () {
     var METHOD_CODE = 'inpost_inpost';
 
-    function showWidget() {
-        var el = document.getElementById('inpost-widget-wrapper');
-        if (el) el.style.display = 'block';
-    }
-
-    function hideWidget() {
-        var el = document.getElementById('inpost-widget-wrapper');
-        if (el) el.style.display = 'none';
-    }
-
     function getSelectedShipping() {
         var el = document.querySelector('input[name="shipping_method"]:checked');
         return el ? el.value : null;
     }
 
     function toggleWidget() {
-        if (getSelectedShipping() === METHOD_CODE) {
-            showWidget();
-        } else {
-            hideWidget();
-        }
+        var wrapper = document.getElementById('inpost-widget-wrapper');
+        if (!wrapper) return;
+        wrapper.style.display = getSelectedShipping() === METHOD_CODE ? 'block' : 'none';
     }
+
+    document.addEventListener('change', function (e) {
+        if (e.target && e.target.name === 'shipping_method') {
+            toggleWidget();
+        }
+    });
 
     window.inpostOpenWidget = function () {
         var modal = document.getElementById('inpost-modal');
         if (modal) modal.style.display = 'flex';
+
+        var container = document.getElementById('inpost-map');
+        if (container && !container.hasChildNodes()) {
+            var widget = document.createElement('inpost-geowidget');
+            widget.setAttribute('token', window.INPOST_TOKEN || '');
+            widget.setAttribute('language', 'pl');
+            widget.setAttribute('config', 'parcelcollect');
+            widget.setAttribute('onpoint', 'onInpostSelect');
+            widget.style.width   = '100%';
+            widget.style.height  = '100%';
+            widget.style.display = 'block';
+            container.appendChild(widget);
+        }
     };
 
     window.inpostCloseWidget = function () {
         var modal = document.getElementById('inpost-modal');
         if (modal) modal.style.display = 'none';
     };
-
-    /* Odbiór wybranego paczkomatu z iframe przez postMessage */
-    window.addEventListener('message', function (event) {
-        if (!event.data || event.data.type !== 'inpost.point.selected') return;
-
-        var point = event.data.payload;
-        if (!point) return;
-
-        window.onInpostSelect(point);
-    });
 
     window.onInpostSelect = onInpostSelect;
     function onInpostSelect(point) {
@@ -86,21 +83,19 @@
         .catch(function (e) {
             console.error('InPost save error:', e);
         });
-    }
-
-    document.addEventListener('change', function (e) {
-        if (e.target && e.target.name === 'shipping_method') {
-            toggleWidget();
-        }
-    });
+    };
 
     function checkInitial() {
         var checked = document.querySelector('input[name="shipping_method"]:checked');
-        if (checked && checked.value === METHOD_CODE) showWidget();
+        if (checked && checked.value === METHOD_CODE) {
+            var wrapper = document.getElementById('inpost-widget-wrapper');
+            if (wrapper) wrapper.style.display = 'block';
+        }
     }
 
     var obs = new MutationObserver(function () { checkInitial(); });
     obs.observe(document.body, { childList: true, subtree: true });
     setTimeout(function () { obs.disconnect(); }, 15000);
+
     setTimeout(toggleWidget, 500);
 })();
