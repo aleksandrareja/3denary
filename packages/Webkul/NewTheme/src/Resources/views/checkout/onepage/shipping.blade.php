@@ -128,6 +128,13 @@
         });
         
     </script>
+
+    <script>
+        window.INPOST_TOKEN    = '{{ core()->getConfigData('sales.carriers.inpost.geowidget_token') ?? '' }}';
+        window.INPOST_SAVE_URL = '{{ route('inpost.save-point') }}';
+        window.INPOST_CSRF     = '{{ csrf_token() }}';
+    </script>
+    <script src="{{ asset('vendor/inpost/geowidget.js') }}" defer></script>
 @endPushOnce
 
 
