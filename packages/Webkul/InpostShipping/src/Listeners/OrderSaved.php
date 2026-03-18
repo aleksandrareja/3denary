@@ -41,11 +41,13 @@ class OrderSaved
         }
 
         try {
-            $order->update([
-                'inpost_point_id'      => $pointId,
-                'inpost_point_name'    => $pointName,
-                'inpost_point_address' => $pointAddress,
-            ]);
+            \Illuminate\Support\Facades\DB::table('orders')
+                ->where('id', $order->id)
+                ->update([
+                    'inpost_point_id'      => $pointId,
+                    'inpost_point_name'    => $pointName,
+                    'inpost_point_address' => $pointAddress,
+                ]);
 
             // Clear session data after successful save
             session()->forget(['inpost_point_id', 'inpost_point_name', 'inpost_point_address']);
