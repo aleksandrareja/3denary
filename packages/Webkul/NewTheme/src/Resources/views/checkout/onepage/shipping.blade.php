@@ -9,8 +9,6 @@
     <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-methods>
 
-
-
 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
 
 @pushOnce('scripts')
@@ -60,23 +58,12 @@
                                         :for="rate.method"
                                     >
                                     </label>
-                                    
 
                                     <label 
                                         class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
-                                        <template v-if="rate.image">
-                                            <img
-                                                :src="rate.image"
-                                                :alt="rate.method_title"
-                                                class="max-h-20 max-w-[120px] object-contain mb-2"
-                                            />
-                                        </template>
-
-                                        <template v-else>
-                                            <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
-                                        </template>
+                                        <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
 
                                         <div>
                                             <p class="mt-1.5 text-2xl font-semibold max-md:text-base">
@@ -139,105 +126,3 @@
         });
     </script>
 @endPushOnce
-
-{!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
-
-<!--
-
-@pushOnce('scripts')
-    <link rel="stylesheet" href="https://geowidget.inpost.pl/inpost-geowidget.css">
-    <script src="https://geowidget.inpost.pl/inpost-geowidget.js"></script>
-    <script>
-(function () {
-
-    const METHOD_CODE = 'inpost_inpost'; // 🔥 TU MUSI BYĆ TWOJE
-
-    function getSelectedShipping() {
-        const el = document.querySelector('input[name="shipping_method"]:checked');
-        return el ? el.value : null;
-    }
-
-    function toggleWidget() {
-        const wrapper = document.getElementById('inpost-widget-wrapper');
-
-        if (!wrapper) return;
-
-        if (getSelectedShipping() === METHOD_CODE) {
-            wrapper.style.display = 'block';
-        } else {
-            wrapper.style.display = 'none';
-        }
-    }
-
-    // 🔥 KLUCZ: działa z Vue (delegacja eventów)
-    document.addEventListener('click', function (e) {
-        if (e.target.name === 'shipping_method') {
-            setTimeout(toggleWidget, 200);
-        }
-    });
-
-    window.inpostOpenWidget = function () {
-
-        if (!window.customElements.get('inpost-geowidget')) {
-            alert('Widget InPost się nie załadował');
-            return;
-        }
-
-        document.getElementById('inpost-modal').style.display = 'flex';
-
-        const map = document.getElementById('inpost-map');
-
-        if (!map.hasChildNodes()) {
-            const widget = document.createElement('inpost-geowidget');
-
-            widget.setAttribute('token', '{{ $geowidgetToken }}');
-            widget.setAttribute('language', 'pl');
-            widget.setAttribute('config', 'parcelcollect');
-            widget.setAttribute('onpoint', 'onInpostSelect');
-
-            widget.style.width = '100%';
-            widget.style.height = '100%';
-
-            map.appendChild(widget);
-        }
-    };
-
-    window.inpostCloseWidget = function () {
-        document.getElementById('inpost-modal').style.display = 'none';
-    };
-
-    window.onInpostSelect = function (point) {
-
-        inpostCloseWidget();
-
-        const id = point.name;
-
-        const address = point.address?.line1 || '';
-
-        document.getElementById('inpost-point-name').innerText = id;
-        document.getElementById('inpost-point-address').innerText = address;
-
-        document.getElementById('inpost-selected').classList.remove('hidden');
-        document.getElementById('inpost-open-btn').classList.add('hidden');
-
-        fetch('{{ route('inpost.save-point') }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            },
-            body: JSON.stringify({
-                point_id: id,
-                point_address: address
-            })
-        });
-    };
-
-    // 🔥 start po załadowaniu + po Vue
-    setTimeout(toggleWidget, 500);
-    setTimeout(toggleWidget, 1500);
-
-})();
-</script>
-@endPushOnce
--->
