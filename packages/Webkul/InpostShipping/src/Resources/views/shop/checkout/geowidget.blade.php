@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="{{ $widgetBaseUrl }}/inpost-geowidget.css">
     <script src="{{ $widgetBaseUrl }}/inpost-geowidget.js" defer></script>
 @endonce-->
+@php
+    $geowidgetToken    = core()->getConfigData('sales.carriers.inpost.geowidget_token') ?? '';
+    $environment       = core()->getConfigData('sales.carriers.inpost.environment') ?? 'sandbox';
+    $widgetBaseUrl     = $environment === 'production'
+        ? 'https://geowidget.inpost.pl'
+        : 'https://sandbox-geowidget.inpost.pl';
+    $savedPointId      = session('inpost_point_id', '');
+    $savedPointAddress = session('inpost_point_address', '');
+    $iframeUrl         = $widgetBaseUrl . '/pl?token=' . $geowidgetToken . '&callback=onInpostSelect';
+@endphp
 
 <div id="inpost-widget-wrapper" style="display:none" class="mt-4 p-4 border rounded bg-white">
     <h3 class="font-semibold mb-2">📦 Wybierz paczkomat</h3>
