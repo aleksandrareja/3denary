@@ -79,8 +79,8 @@
             var INPOST_METHOD = 'inpost_inpost';
 
             function inpostShowWidget() {
-                var el = document.getElementById('inpost-widget-wrapper');
-                if (el) el.style.display = 'block';
+                var el = document.getElementById('inpost-widget-wrapper').style.display = 'block';
+                //if (el) el.style.display = 'block';
             }
 
             function inpostHideWidget() {
@@ -151,14 +151,6 @@
                 .catch(function(err) { console.error('InPost save-point error:', err); });
             };
 
-            document.addEventListener('change', function (e) {
-                if (!e.target || e.target.name !== 'shipping_method') return;
-                if (e.target.value === INPOST_METHOD) {
-                    inpostShowWidget();
-                } else {
-                    inpostHideWidget();
-                }
-            });
 
             function checkInitialState() {
                 var checked = document.querySelector('input[name="shipping_method"]:checked');
@@ -173,11 +165,6 @@
                 checkInitialState();
             }
 
-            var observer = new MutationObserver(function () {
-                checkInitialState();
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-            setTimeout(function () { observer.disconnect(); }, 15000);
 
         })();
     </script>
