@@ -85,11 +85,11 @@ class InpostShippingServiceProvider extends EventServiceProvider
 
 
         // Inject InPost locker info into the admin order detail view
-        Event::listen(
+        /*Event::listen(
             'bagisto.admin.sales.orders.view.after',
             function ($viewRenderEventManager) {
                 $viewRenderEventManager->addTemplate('inpost::admin.orders.inpost-info');
             }
-        );
+        );*/
     }
 }
