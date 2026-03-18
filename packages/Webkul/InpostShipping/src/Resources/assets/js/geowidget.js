@@ -1,15 +1,22 @@
 (function () {
     var METHOD_CODE = 'inpost_inpost';
 
-    function showWidget() {
-        var el = document.getElementById('inpost-widget-wrapper');
-        if (el) el.style.display = 'block';
+    function getSelectedShipping() {
+        var el = document.querySelector('input[name="shipping_method"]:checked');
+        return el ? el.value : null;
     }
 
-    function hideWidget() {
-        var el = document.getElementById('inpost-widget-wrapper');
-        if (el) el.style.display = 'none';
+    function toggleWidget() {
+        var wrapper = document.getElementById('inpost-widget-wrapper');
+        if (!wrapper) return;
+        wrapper.style.display = getSelectedShipping() === METHOD_CODE ? 'block' : 'none';
     }
+
+    document.addEventListener('change', function (e) {
+        if (e.target && e.target.name === 'shipping_method') {
+            toggleWidget();
+        }
+    });
 
     window.inpostOpenWidget = function () {
         var modal = document.getElementById('inpost-modal');
@@ -22,7 +29,9 @@
             widget.setAttribute('language', 'pl');
             widget.setAttribute('config', 'parcelcollect');
             widget.setAttribute('onpoint', 'window.onInpostSelect');
-            widget.style.cssText = 'width:100%;height:100%;display:block;';
+            widget.style.width   = '100%';
+            widget.style.height  = '100%';
+            widget.style.display = 'block';
             container.appendChild(widget);
         }
     };
@@ -36,7 +45,7 @@
         inpostCloseWidget();
 
         var pointId = point.name;
-        var addr = point.address_details || {};
+        var addr    = point.address_details || {};
         var pointAddress = addr.street
             ? (addr.street + ' ' + (addr.building_number || '') + ', ' + (addr.post_code || '') + ' ' + (addr.city || '')).trim()
             : ((point.address && point.address.line1) || '');
@@ -65,25 +74,27 @@
             }),
         })
         .then(function (r) { return r.json(); })
-        .catch(function (e) { console.error('InPost save error:', e); });
+        .then(function (data) {
+            if (!data.success) {
+                console.error('InPost: blad zapisu', data);
+            }
+        })
+        .catch(function (e) {
+            console.error('InPost save error:', e);
+        });
     };
-
-    document.addEventListener('change', function (e) {
-        if (!e.target || e.target.name !== 'shipping_method') return;
-        if (e.target.value === METHOD_CODE) {
-            showWidget();
-        } else {
-            hideWidget();
-        }
-    });
 
     function checkInitial() {
         var checked = document.querySelector('input[name="shipping_method"]:checked');
-        if (checked && checked.value === METHOD_CODE) showWidget();
+        if (checked && checked.value === METHOD_CODE) {
+            var wrapper = document.getElementById('inpost-widget-wrapper');
+            if (wrapper) wrapper.style.display = 'block';
+        }
     }
 
     var obs = new MutationObserver(function () { checkInitial(); });
     obs.observe(document.body, { childList: true, subtree: true });
     setTimeout(function () { obs.disconnect(); }, 15000);
-    checkInitial();
+
+    setTimeout(toggleWidget, 500);
 })();
