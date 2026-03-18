@@ -5,6 +5,76 @@
     <meta name="keywords" content="@lang('shop::app.checkout.onepage.index.checkout')"/>
 @endPush
 
+@once
+    <!-- CSS widgetu -->
+    <link rel="stylesheet" href="https://geowidget.inpost.pl/inpost-geowidget.css">
+
+    <!-- JS widgetu -->
+    <script src="https://geowidget.inpost.pl/inpost-geowidget.js" defer></script>
+
+    <!-- Twój własny JS do obsługi otwierania modala i wyboru punktu -->
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            const METHOD_CODE = 'inpost_inpost';
+
+            function toggleWidget() {
+                const wrapper = document.getElementById('inpost-widget-wrapper');
+                if (!wrapper) return;
+                const selected = document.querySelector('input[name="shipping_method"]:checked')?.value;
+                wrapper.style.display = selected === METHOD_CODE ? 'block' : 'none';
+            }
+
+            document.addEventListener('click', e => {
+                if (e.target.name === 'shipping_method') {
+                    setTimeout(toggleWidget, 200);
+                }
+            });
+
+            window.inpostOpenWidget = function() {
+                const modal = document.getElementById('inpost-modal');
+                modal.style.display = 'flex';
+                const container = document.getElementById('inpost-map');
+                if (!container.hasChildNodes()) {
+                    const widget = document.createElement('inpost-geowidget');
+                    widget.setAttribute('token', '{{ $geowidgetToken }}');
+                    widget.setAttribute('language', 'pl');
+                    widget.setAttribute('config', 'parcelcollect');
+                    widget.setAttribute('onpoint', 'onInpostSelect');
+                    widget.style.width = '100%';
+                    widget.style.height = '100%';
+                    container.appendChild(widget);
+                }
+            };
+
+            window.inpostCloseWidget = function() {
+                document.getElementById('inpost-modal').style.display = 'none';
+            };
+
+            window.onInpostSelect = function(point) {
+                inpostCloseWidget();
+                const id = point.name;
+                const address = point.address?.line1 || '';
+                document.getElementById('inpost-point-name').innerText = id;
+                document.getElementById('inpost-point-address').innerText = address;
+                document.getElementById('inpost-selected').classList.remove('hidden');
+                document.getElementById('inpost-open-btn').classList.add('hidden');
+
+                fetch('{{ route('inpost.save-point') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({ point_id: id, point_address: address })
+                });
+            };
+
+            // początkowe wyświetlenie widgetu jeśli metoda jest wybrana
+            setTimeout(toggleWidget, 500);
+        });
+    </script>
+@endonce
+
 <x-shop::layouts
     :has-header="false"
     :has-feature="false"
