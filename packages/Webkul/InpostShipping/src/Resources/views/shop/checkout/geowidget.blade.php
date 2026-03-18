@@ -8,10 +8,6 @@
     $savedPointAddress = session('inpost_point_address', '');
 @endphp
 
-@once
-    <link rel="stylesheet" href="{{ $widgetBaseUrl }}/inpost-geowidget.css">
-    <script src="{{ $widgetBaseUrl }}/inpost-geowidget.js" defer></script>
-@endonce
 
 {{-- Przycisk i informacja o wybranym paczkomacie --}}
 <div id="inpost-widget-wrapper" style="display:none;" class="mt-4 p-4 border rounded bg-white">
