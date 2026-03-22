@@ -40,6 +40,7 @@ class Inpost extends AbstractShipping
         $rate->method_description  = $this->getConfigData('description') ?: 'Dostawa do paczkomatu InPost';
         $rate->price               = (float) ($this->getConfigData('default_rate') ?? 9.99);
         $rate->base_price          = $rate->price;
+        $rate->method_image_url      = $this->getConfigData('logo') ?: null;
 
         return $rate;
     }
