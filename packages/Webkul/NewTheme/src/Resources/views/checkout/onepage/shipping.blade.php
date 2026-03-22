@@ -7,9 +7,9 @@
 >
     <!-- Shipping Method Shimmer Effect -->
     <x-shop::shimmer.checkout.onepage.shipping-method />
-    @include('inpost::shop.checkout.geowidget')
 </v-shipping-methods>
 
+@include('inpost::shop.checkout.geowidget')
 
 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
 
@@ -71,7 +71,7 @@
                                             </p>
                                         </div>
 
-                                         <div class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"></div>
+                                         <span class="flex icon-radio-unselect peer-checked:icon-radio-select cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"></span>
                                     </label>
                                 </div>
 
