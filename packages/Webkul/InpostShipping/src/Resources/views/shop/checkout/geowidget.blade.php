@@ -10,11 +10,11 @@
 
 
 {{-- Przycisk i informacja o wybranym paczkomacie --}}
-<div id="inpost-widget-wrapper" style="display:none;" class="mt-4 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
+<div id="inpost-widget-wrapper" style="display:none;" class="mt-4 mb-4 rounded-md border  bg-gray-50 p-5 shadow-sm">
     <div id="inpost-selected" class="{{ $savedPointId ? '' : 'hidden' }} flex items-center justify-between">
         <p><b id="inpost-point-name">{{ $savedPointId }}</b></p>
         <p id="inpost-point-address">{{ $savedPointAddress }}</p>
-        <button type="button" onclick="inpostOpenWidget()" class="rounded-md  px-5 py-2.5 font-semibold text-sm uppercase text-black" style="background-color: #ffcd00;">
+        <button type="button" onclick="inpostOpenWidget()" class="rounded-md px-5 py-2.5 font-semibold text-sm uppercase text-black" style="background-color: #ffcd00;">
             Zmień paczkomat
         </button>
     </div>

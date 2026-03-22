@@ -62,7 +62,7 @@
                                     </label>
 
                                     <label 
-                                        class="flex cursor-pointer gap-4 rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
+                                        class="flex cursor-pointer gap-4 rounded-md border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
                                         <img 
