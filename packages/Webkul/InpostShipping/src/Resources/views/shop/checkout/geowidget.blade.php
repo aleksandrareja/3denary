@@ -11,10 +11,10 @@
 
 {{-- Przycisk i informacja o wybranym paczkomacie --}}
 <div id="inpost-widget-wrapper" style="display:none;" class="mt-4 mb-4 rounded-md border  bg-gray-50 p-5 shadow-sm">
-    <div id="inpost-selected" class="{{ $savedPointId ? '' : 'hidden' }} flex items-center justify-between">
+    <div id="inpost-selected" class="{{ $savedPointId ? '' : 'hidden' }} flex items-center justify-between max-md:flex-col max-md:items-start gap-4">
         <p><b id="inpost-point-name">{{ $savedPointId }}</b></p>
         <p id="inpost-point-address">{{ $savedPointAddress }}</p>
-        <button type="button" onclick="inpostOpenWidget()" class="rounded-md px-5 py-2.5 font-semibold text-sm uppercase text-black" style="background-color: #ffcd00;">
+        <button type="button" onclick="inpostOpenWidget()" class="px-10 py-2.5 font-semibold text-sm uppercase text-black" style="background-color: #ffcd00;">
             Zmień paczkomat
         </button>
     </div>
@@ -23,7 +23,7 @@
         id="inpost-open-btn"
         type="button"
         onclick="inpostOpenWidget()"
-        class="{{ $savedPointId ? 'hidden' : '' }} rounded-md px-5 py-2.5 font-semibold uppercase text-black text-sm"
+        class="{{ $savedPointId ? 'hidden' : '' }} px-10 py-2.5 font-semibold uppercase text-black text-sm"
         style="background-color: #ffcd00;"
     >
         Otwórz mapę paczkomatów InPost
@@ -39,7 +39,7 @@
 
         {{-- Nagłówek modala --}}
         <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 20px; border-bottom:1px solid #e5e7eb; flex-shrink:0;">
-            <span style="font-weight:600; font-size:16px;">📦 Wybierz paczkomat InPost</span>
+            <span style="font-weight:600; font-size:16px;">Wybierz paczkomat InPost</span>
             <button
                 type="button"
                 onclick="inpostCloseWidget()"
