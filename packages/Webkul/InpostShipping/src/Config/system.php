@@ -60,6 +60,14 @@ return [
                 'locale_based'  => false,
             ],
             [
+                'name'          => 'logo',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.inpost.logo',
+                'type'          => 'image',
+                'validation'    => 'mimes:jpeg,jpg,png,svg',
+                'channel_based' => false,
+                'locale_based'  => false,
+            ],
+            [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.inpost.status',
                 'type'          => 'boolean',

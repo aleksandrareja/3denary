@@ -38,12 +38,12 @@
 
                     <!-- Accordion Blade Component Content -->
                     <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:rounded-t-none max-md:border max-md:border-t-0 max-md:!p-4">
-                        <div class="flex flex-wrap gap-8 max-md:gap-4 max-sm:gap-2.5">
+                        <div class="flex flex-wrap gap-4">
                             <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.before') !!}
 
                                 <div
-                                    class="w-full select-none max-md:max-w-full max-md:flex-auto"
+                                    class="relative w-full select-none max-md:max-w-full max-md:flex-auto"
                                     v-for="rate in method.rates"
                                 >
                                     <input 
@@ -62,10 +62,17 @@
                                     </label>
 
                                     <label 
-                                        class="flex cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
+                                        class="flex cursor-pointer gap-4 rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:rounded-lg max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
-                                        <span class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+                                        <img 
+                                            :src="rate.method_image_url"
+                                            alt="Shipping Method Image"
+                                            class="h-10 w-10 object-contain max-sm:h-6 max-sm:w-6"
+                                            v-if="rate.method_image_url"
+                                        >
+                                        <span  v-else class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
+
 
                                         <div>
                                             <p class="mt-1.5 text-2xl font-semibold max-md:text-base">
