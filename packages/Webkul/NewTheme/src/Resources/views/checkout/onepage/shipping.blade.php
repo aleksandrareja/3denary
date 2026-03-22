@@ -85,7 +85,7 @@
                                         <label class="flex items-center"
                                             :for="rate.method">
                                             <span class="icon-radio-unselect peer-checked:icon-radio-select text-2xl text-navyBlue"></span>
-                                        </div>
+                                        </label>
                                 </div>
 
                                 
