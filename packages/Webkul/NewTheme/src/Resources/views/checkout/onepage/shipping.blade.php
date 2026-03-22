@@ -9,7 +9,7 @@
     <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-methods>
 
-@include('inpost::shop.checkout.geowidget')
+<!--@include('inpost::shop.checkout.geowidget')-->
 
 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_methods.after') !!}
 
@@ -57,9 +57,7 @@
 
                                     <label 
                                         :for="rate.method"
-                                        class="flex items-center justify-between w-full cursor-pointer rounded-xl border border-zinc-200 p-5 transition-all duration-200
-                                            hover:border-navyBlue hover:shadow-sm
-                                            peer-checked:border-navyBlue peer-checked:bg-blue-50"
+                                        class="flex items-center justify-between w-full cursor-pointer rounded-lg border border-zinc-200 p-5"
                                     >
                                         <!-- LEFT: ICON -->
                                         <div class="flex items-center gap-4">
@@ -81,13 +79,23 @@
                                                 </p>
                                             </div>
                                         </div>
+                                    </label>
 
-                                        <!-- RIGHT: RADIO -->
-                                        <div class="flex items-center">
+                                     <!-- RIGHT: RADIO -->
+                                        <label class="flex items-center"
+                                            :for="rate.method">
                                             <span class="icon-radio-unselect peer-checked:icon-radio-select text-2xl text-navyBlue"></span>
                                         </div>
-                                    </label>
                                 </div>
+
+                                
+                                    <div 
+                                        v-if="rate.method === 'inpost_inpost' && selectedMethod === rate.method"
+                                        class="mt-3"
+                                    >
+                                        @include('inpost::shop.checkout.geowidget')
+                                    </div>
+
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
                             </template>
