@@ -68,7 +68,7 @@
                                         <img 
                                             v-if="rate.image"
                                             :src="rate.image"
-                                            class="h-10 w-10 object-contain"
+                                            class="h-16 w-auto object-contain"
                                         />
                                         <span  v-else class="icon-flate-rate text-6xl text-navyBlue max-sm:text-5xl"></span>
 
