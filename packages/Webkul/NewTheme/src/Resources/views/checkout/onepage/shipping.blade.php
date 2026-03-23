@@ -111,10 +111,10 @@
             methods: {
                 store(selectedMethod) {
                     if (selectedMethod === 'inpost_inpost') {
-                        const point = localStorage.getItem('inpost_point_id');
-
-                        if (!point) {
-                            alert('Wybierz paczkomat InPost przed przejściem dalej');
+                        const pointId= localStorage.getItem('inpost_point_id');
+                        if (!pointId) {
+                            alert('Wybierz paczkomat InPost');
+                            $this.$emit('processing', 'shipping');
                             return;
                         }
                     }

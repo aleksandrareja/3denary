@@ -56,6 +56,8 @@
         var selEl  = document.getElementById('inpost-selected');
         var btnEl  = document.getElementById('inpost-open-btn');
 
+        localStorage.setItem('inpost_point_id', pointId);
+
         if (nameEl) nameEl.textContent = pointId;
         if (addrEl) addrEl.textContent = pointAddress;
         if (selEl)  selEl.classList.remove('hidden');
