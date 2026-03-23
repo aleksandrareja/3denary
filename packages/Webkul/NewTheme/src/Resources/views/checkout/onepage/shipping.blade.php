@@ -110,6 +110,14 @@
 
             methods: {
                 store(selectedMethod) {
+                    if (selectedMethod === 'inpost_inpost') {
+                        const point = localStorage.getItem('inpost_point_id');
+
+                        if (!point) {
+                            alert('Wybierz paczkomat InPost przed przejściem dalej');
+                            return;
+                        }
+                    }
                     this.$emit('processing', 'payment');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
