@@ -84,7 +84,7 @@
                 </div>
                 @endif
 
-                <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-10 max-md:flex-col">
+                <div class="flex flex-wrap items-start gap-10 max-lg:gap-5 md:mt-5 max-md:flex-col">
                     <!-- Product Listing Filters -->
                      <div class="max-md:hidden w-[280px] max-md:w-full mt-8">
                         @include('shop::categories.filters')
