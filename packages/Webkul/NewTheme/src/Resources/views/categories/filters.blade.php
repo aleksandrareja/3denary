@@ -147,7 +147,7 @@
             <x-slot:header class="px-0 py-2.5 max-sm:!pb-1.5">
                 <div class="flex items-center justify-between">
                     <p class="text-lg font-semibold max-sm:text-base max-sm:font-medium">
-                        @{{ filter.name }} (@{{ filter.count }})
+                        @{{ filter.name }}
                     </p>
                 </div>
             </x-slot>
@@ -220,7 +220,7 @@
                                     class="icon-uncheck peer-checked:icon-check-box text-2xl text-navyBlue"
                                     ></span>
                                     
-                                    <span class="text-sm text-gray-900">@{{ option.name }}</span>
+                                    <span class="text-sm text-gray-900">@{{ option.name }} (<span v-text="option.count"></span>)</span>
                                 </label>
                             </li>
                         </template>
