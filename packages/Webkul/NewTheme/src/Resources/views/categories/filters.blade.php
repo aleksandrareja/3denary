@@ -221,7 +221,7 @@
                                     ></span>
                                     
                                     <span class="text-sm text-gray-900">@{{ option.name }}</span>
-                                    <span class="text-gray-600">(@{{ option.count }})</span>
+                                    <span class="text-xs text-gray-400">(@{{ option.count }})</span>
                                 </label>
                             </li>
                         </template>
